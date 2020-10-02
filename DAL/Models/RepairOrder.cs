@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ComputerReperatieShop.Models
+namespace DAL.Models
 {
-    public class ReperatieOpdracht
+    public class RepairOrder
     {
         public int Id { get; set; }
 

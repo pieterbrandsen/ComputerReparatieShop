@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ComputerReperatieShop.Data.Models
+namespace ComputerRepairShop.Data.Models
 {
     public class RepairOrder
     {

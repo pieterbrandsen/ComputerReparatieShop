@@ -186,9 +186,9 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAL\ComputerReperatieShop.Data.csproj">
+    <ProjectReference Include="..\DAL\ComputerRepairShop.Data.csproj">
       <Project>{CB28B9FE-56BF-460D-94BF-6980E07FD1E5}</Project>
-      <Name>ComputerReperatieShop.Data</Name>
+      <Name>ComputerRepairShop.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

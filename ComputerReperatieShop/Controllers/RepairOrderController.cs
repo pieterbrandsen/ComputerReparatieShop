@@ -1,11 +1,11 @@
-﻿using ComputerReperatieShop.Data.DAL;
+﻿using ComputerRepairShop.Data.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ComputerReperatieShop.Web.Controllers
+namespace ComputerRepairShop.Web.Controllers
 {
     public class RepairOrderController : Controller
     {

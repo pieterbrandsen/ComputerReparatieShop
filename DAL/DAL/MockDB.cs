@@ -6,7 +6,7 @@ using ComputerReperatieShop.Data.Models;
 
 namespace ComputerReperatieShop.Data.DAL
 {
-    class MockDB
+    public class MockDB : IMockDB
     {
         List<RepairOrder> repairOrders;
 

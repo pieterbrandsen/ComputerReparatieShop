@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ComputerReperatieShop.Controllers
 {
-    public class ReperatieOpdrachtenController : Controller
+    public class RepairOrder : Controller
     {
         // GET: ReperatieOpdrachten
         public ActionResult Index()

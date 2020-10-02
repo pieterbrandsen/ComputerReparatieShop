@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DAL.Models;
 
@@ -7,7 +8,7 @@ namespace DAL.DAL
 {
     class MockDB
     {
-        readonly List<RepairOrder> repairOrders;
+        List<RepairOrder> repairOrders;
 
         public MockDB()
         {
@@ -19,6 +20,11 @@ namespace DAL.DAL
                 new RepairOrder {Id = 3, Name = "Name3", Description = "Description3", Status = Status.Pending, StartDate = DateTime.Today, EndDate = DateTime.Today, Visible = false },
                 new RepairOrder {Id = 4, Name = "Name4", Description = "Description4", Status = Status.Pending, StartDate = DateTime.Today, EndDate = DateTime.Today, Visible = false },
             };
+        }
+
+        public IEnumerable<RepairOrder> GetAll()
+        {
+            return repairOrders.OrderBy(r => r.Name);
         }
     }
 }

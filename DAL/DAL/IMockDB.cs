@@ -1,9 +1,9 @@
-﻿using Data.Models;
+﻿using ComputerReperatieShop.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.DAL
+namespace ComputerReperatieShop.Data.DAL
 {
     public interface IMockDB
     {

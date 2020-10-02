@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Data.Models;
+using ComputerReperatieShop.Data.Models;
 
-namespace Data.DAL
+namespace ComputerReperatieShop.Data.DAL
 {
     class MockDB
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ComputerReperatieShop.Controllers
+namespace ComputerReperatieShop.Web.Controllers
 {
     public class RepairOrderController : Controller
     {

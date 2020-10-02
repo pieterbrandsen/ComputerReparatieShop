@@ -1,4 +1,4 @@
-﻿@model IEnumerable<>
+﻿@model IEnumerable<ComputerReperatieShop.Data.Models.RepairOrder>
 @{
     ViewBag.Title = "Index";
 }
@@ -16,9 +16,10 @@
     @foreach (var item in Model)
     {
        <tr> 
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>item.Name</td>
+        <td>item.Status</td>
+        <td>item.StartDate</td>
+        <td>item.EndDate</td>
        </tr>
     }
 </table>

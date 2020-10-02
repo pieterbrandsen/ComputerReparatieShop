@@ -13,13 +13,13 @@
 
     </thead>
 
-    @foreach (var item in Model)
+    @foreach (var repairOrder in Model)
     {
        <tr> 
-        <td>item.Name</td>
-        <td>item.Status</td>
-        <td>item.StartDate</td>
-        <td>item.EndDate</td>
+           <td>@repairOrder.Name</td>
+           @*<td>@repairOrder.Status</td>
+           <td>@repairOrder.StartDate</td>
+           <td>@repairOrder.EndDate</td>*@
        </tr>
     }
 </table>

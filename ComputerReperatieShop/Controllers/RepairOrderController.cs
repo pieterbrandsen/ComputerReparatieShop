@@ -1,5 +1,4 @@
 ﻿using ComputerReperatieShop.Data.DAL;
-using Data.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,26 +16,26 @@ namespace ComputerReperatieShop.Web.Controllers
             db = new MockDB();
         }
 
-        // GET: ReperatieOpdrachten
+        // GET: RepairOrder
         public ActionResult Index()
         {
             var model = db.GetAll();
             return View(model);
         }
 
-        // GET: ReperatieOpdrachten/Details/5
+        // GET: RepairOrder/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ReperatieOpdrachten/Create
+        // GET: RepairOrder/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ReperatieOpdrachten/Create
+        // POST: RepairOrder/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -52,13 +51,13 @@ namespace ComputerReperatieShop.Web.Controllers
             }
         }
 
-        // GET: ReperatieOpdrachten/Edit/5
+        // GET: RepairOrder/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: ReperatieOpdrachten/Edit/5
+        // POST: RepairOrder/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -74,13 +73,13 @@ namespace ComputerReperatieShop.Web.Controllers
             }
         }
 
-        // GET: ReperatieOpdrachten/Delete/5
+        // GET: RepairOrder/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: ReperatieOpdrachten/Delete/5
+        // POST: RepairOrder/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

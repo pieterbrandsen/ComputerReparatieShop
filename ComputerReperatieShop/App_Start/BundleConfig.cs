@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace ComputerReperatieShop
+namespace ComputerRepairShop
 {
     public class BundleConfig
     {
@@ -24,7 +24,8 @@ namespace ComputerReperatieShop
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/custom.css"));
         }
     }
 }

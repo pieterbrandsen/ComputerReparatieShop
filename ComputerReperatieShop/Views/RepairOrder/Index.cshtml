@@ -1,26 +1,42 @@
-﻿@model IEnumerable<ComputerReperatieShop.Data.Models.RepairOrder>
+﻿@model IEnumerable<ComputerRepairShop.Data.Models.RepairOrder>
+@using ComputerRepairShop.Classes.Helpers;
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Reperatie Opdrachten</h2>
-<table>
+<h2>Repair Order</h2>
+<table class="table">
     <thead>
-        <th> Name </th>
-        <th>status</th>
-        <th>start date</th>
-        <th>end date</th>
-
+        <tr>
+            <th>@Html.DisplayNameFor(Model => Model.Name)</th>
+            <th>@Html.DisplayNameFor(Model => Model.Status)</th>
+            <th>@Html.DisplayNameFor(Model => Model.StartDate)</th>
+            <th>@Html.DisplayNameFor(Model => Model.EndDate)</th>
+            <th>Manage</th>
+        </tr>
     </thead>
+    <tbody>
+        @foreach (var repairOrder in Model)
+        {
+            string rowClass = "None";
+            if ((repairOrder.StartDate.Ticks > DateTime.Now.Date.Ticks && repairOrder.Status == RepairOrderStatus.Pending) || repairOrder.EndDate.Ticks > DateTime.Now.Date.Ticks)
+            {
+                rowClass = "DateDue";
+            };
 
-    @foreach (var repairOrder in Model)
-    {
-       <tr> 
-           <td>@repairOrder.Name</td>
-           @*<td>@repairOrder.Status</td>
-           <td>@repairOrder.StartDate</td>
-           <td>@repairOrder.EndDate</td>*@
-       </tr>
-    }
+        <tr>
+            <td>@repairOrder.Name</td>
+            <td class="@repairOrder.Status">@repairOrder.Status</td>
+            <td class="@rowClass">@repairOrder.StartDate</td>
+            <td class="@rowClass">@repairOrder.EndDate</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = repairOrder.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = repairOrder.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = repairOrder.Id })
+            </td>
+        </tr>
+        }
+    </tbody>
 </table>
 

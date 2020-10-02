@@ -34,6 +34,15 @@ namespace ComputerRepairShop.Data.DAL
             return repairOrders.FirstOrDefault(repairOrders => repairOrders.Id == id);
         }
 
+        public void Delete(int id)
+        {
+            var orderToDelete = Get(id);
+            if(orderToDelete != null)
+            {
+                repairOrders.Remove(orderToDelete);
+            }
+        }
+
         public IEnumerable<RepairOrder> GetAll()
         {
             return repairOrders.OrderBy(r => r.EndDate.Ticks);

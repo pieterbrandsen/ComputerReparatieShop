@@ -1,25 +1,25 @@
 ﻿@model IEnumerable<ComputerReperatieShop.Data.Models.RepairOrder>
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Reperatie Opdrachten</h2>
-<table>
+<table class="table">
     <thead>
         <th> Name </th>
         <th>status</th>
         <th>start date</th>
         <th>end date</th>
-
     </thead>
 
     @foreach (var repairOrder in Model)
     {
        <tr> 
            <td>@repairOrder.Name</td>
-           @*<td>@repairOrder.Status</td>
+           <td>@repairOrder.Status</td>
            <td>@repairOrder.StartDate</td>
-           <td>@repairOrder.EndDate</td>*@
+           <td>@repairOrder.EndDate</td>
        </tr>
     }
 </table>

@@ -24,7 +24,7 @@ namespace ComputerReperatieShop.Data.DAL
 
         public IEnumerable<RepairOrder> GetAll()
         {
-            return repairOrders.OrderBy(r => r.Name);
+            return repairOrders.OrderBy(r => r.EndDate.Ticks);
         }
     }
 }

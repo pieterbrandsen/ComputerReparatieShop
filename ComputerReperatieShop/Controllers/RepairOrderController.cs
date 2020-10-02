@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,12 +7,20 @@ using System.Web.Mvc;
 
 namespace ComputerReperatieShop.Controllers
 {
-    public class RepairOrder : Controller
+    public class RepairOrderController : Controller
     {
+        IMockDB db;
+
+        public RepairOrderController(IMockDB db)
+        {
+            this.db = db;
+        }
+
         // GET: ReperatieOpdrachten
         public ActionResult Index()
         {
-            return View();
+            var model = db.GetAll();
+            return View(model);
         }
 
         // GET: ReperatieOpdrachten/Details/5

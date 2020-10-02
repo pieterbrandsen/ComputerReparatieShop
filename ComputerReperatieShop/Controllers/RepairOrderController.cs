@@ -86,6 +86,7 @@ namespace ComputerRepairShop.Web.Controllers
 
         // POST: RepairOrder/Delete/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try

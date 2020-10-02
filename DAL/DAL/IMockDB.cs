@@ -10,6 +10,7 @@ namespace ComputerRepairShop.Data.DAL
         IEnumerable<RepairOrder> GetAll();
         void Add(RepairOrder order);
         RepairOrder Get(int Id);
-
+        void Delete(int id);
+        
     }
 }

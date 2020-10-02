@@ -22,6 +22,17 @@ namespace ComputerReperatieShop.Data.DAL
             };
         }
 
+        public void Add(RepairOrder newRepair)
+        {
+            repairOrders.Add(newRepair);
+            newRepair.Id = repairOrders.Max(r => r.Id) + 1;
+        }
+
+        public RepairOrder Get(int id) 
+        {
+            return repairOrders.FirstOrDefault(repairOrders => repairOrders.Id == id);
+        }
+
         public IEnumerable<RepairOrder> GetAll()
         {
             return repairOrders.OrderBy(r => r.Name);

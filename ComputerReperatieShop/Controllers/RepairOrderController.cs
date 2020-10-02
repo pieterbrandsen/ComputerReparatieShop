@@ -76,7 +76,12 @@ namespace ComputerReperatieShop.Web.Controllers
         // GET: RepairOrder/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var model = db.Get(id);
+            if(model == null)
+            {
+                return View("NotFound");
+            }
+            return View(model);
         }
 
         // POST: RepairOrder/Delete/5
@@ -86,7 +91,6 @@ namespace ComputerReperatieShop.Web.Controllers
             try
             {
                 // TODO: Add delete logic here
-
                 return RedirectToAction("Index");
             }
             catch

@@ -6,7 +6,7 @@
     RepairOrderStatus
 */
 .Pending {
-    background-color:aliceblue;
+    background-color:brown;
 }
 .Underway {
     background-color: aqua;

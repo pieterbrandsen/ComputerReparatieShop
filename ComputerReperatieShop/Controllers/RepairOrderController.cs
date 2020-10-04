@@ -65,6 +65,7 @@ namespace ComputerRepairShop.Web.Controllers
         }
 
         // GET: RepairOrder/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -72,18 +73,13 @@ namespace ComputerRepairShop.Web.Controllers
 
         // POST: RepairOrder/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(RepairOrder repairOrder, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                // TODO: Uncomment bottom redirect to go to unimplemented details views.
+            db.Add(repairOrder);
+            return RedirectToAction("Index");
+            //return RedirectToAction("Details", new { id = repairOrder.Id });
         }
 
         // GET: RepairOrder/Edit/5

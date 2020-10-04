@@ -66,6 +66,7 @@ namespace ComputerRepairShop.Web.Controllers
 
         // GET: RepairOrder/Create
         [HttpGet]
+        [ValidateAntiForgeryToken]
         public ActionResult Create()
         {
             return View();

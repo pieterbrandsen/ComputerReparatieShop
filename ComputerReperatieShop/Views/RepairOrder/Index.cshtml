@@ -14,13 +14,15 @@
     {
         <h4 style="display:inline">@statusAmount.Key : @statusAmount.Value </h4>
     }
+
     <div class="progress" style="margin-top:2px;">
         @foreach (var statusAmount in Model.statusCount)
-        {
-     <div class="progress-bar @statusAmount.Key" role="progressbar" style="width: 15%" aria-valuenow="@statusAmount.Value" aria-valuemin="0" aria-valuemax="100"></div>
+        { 
+            <div class="progress-bar @statusAmount.Key" role="progressbar" style="width: @((Convert.ToInt32(statusAmount.Value/(Model.statusCount.Count()*0.01)))+"%")" aria-valuenow="@statusAmount.Value" aria-valuemin="0" aria-valuemax="@(Model.statusCount.Count())"></div>
         }
     </div>
 </div>
+
     <table class="table">
         <thead class="thead-dark">
             <tr>

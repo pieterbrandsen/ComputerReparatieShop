@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComputerRepairShop.Data.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,12 @@ namespace ComputerRepairShop.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IReparatieShopData db;
+
+        public HomeController(IReparatieShopData db)
+        {
+            this.db = db;
+        }
         public ActionResult Index()
         {
             return View();

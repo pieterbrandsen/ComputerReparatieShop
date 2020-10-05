@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Security.Cryptography.X509Certificates;
 using ComputerRepairShop.Data.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ComputerRepairShop.ViewModels
 {

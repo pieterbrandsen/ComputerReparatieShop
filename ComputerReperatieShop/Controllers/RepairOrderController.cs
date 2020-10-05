@@ -12,11 +12,11 @@ namespace ComputerRepairShop.Web.Controllers
 {
     public class RepairOrderController : Controller
     {
-        IMockDB db;
+        private readonly IReparatieShopData db;
 
-        public RepairOrderController()
+        public RepairOrderController(IReparatieShopData db)
         {
-            db = new MockDB();
+            this.db = db;
         }
 
         // GET: RepairOrder
@@ -65,6 +65,7 @@ namespace ComputerRepairShop.Web.Controllers
         }
 
         // GET: RepairOrder/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -72,40 +73,47 @@ namespace ComputerRepairShop.Web.Controllers
 
         // POST: RepairOrder/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(RepairOrder repairOrder, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                // TODO: Uncomment bottom redirect to go to unimplemented details views.
+            db.Add(repairOrder);
+            return RedirectToAction("Index");
+            //return RedirectToAction("Details", new { id = repairOrder.Id });
         }
 
         // GET: RepairOrder/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = db.Get(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
         }
 
         // POST: RepairOrder/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(RepairOrder repairOrder, FormCollection collection)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Update(repairOrder);
+                    // TODO: Uncomment "Details" redirect when implemented
+                    // return RedirectToAction("Details", new { id = repairOrder.Id });
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View(repairOrder);
         }
 
         // GET: RepairOrder/Delete/5

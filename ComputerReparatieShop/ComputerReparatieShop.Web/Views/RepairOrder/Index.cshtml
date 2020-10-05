@@ -8,7 +8,7 @@
     @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary Btn-Create" })
     @foreach (var statusAmount in Model.statusCount)
     {
-        <h4 style="display:inline">@statusAmount.Key : @statusAmount.Value </h4>
+        <h4 style="display:inline">@statusAmount.Key : @statusAmount.Value, </h4>
     }
 
     <div class="progress" style="margin-top:2px;">
@@ -35,8 +35,8 @@
             <tr>
                 <td>@repairOrder.Name</td>
                 <td style="text-align:center" class="@repairOrder.Status">@repairOrder.Status</td>
-                <td @*class="@rowClass"*@>@repairOrder.StartDate</td>
-                <td @*class="@rowClass"*@>@repairOrder.EndDate</td>
+                <td @*class="@rowClass"*@>@repairOrder.StartDate.ToString("dddd, dd MMMM yyyy")</td>
+                <td @*class="@rowClass"*@>@repairOrder.EndDate.ToString("dddd, dd MMMM yyyy")</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = repairOrder.Id }, new { @class = "btn btn-outline-secondary" })
                     @Html.ActionLink("Details", "Details", new { id = repairOrder.Id }, new { @class = "btn btn-outline-secondary" })

@@ -60,7 +60,12 @@ namespace ReparatieShop.Web.Controllers
         // GET: RepairOrder/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var model = db.Get(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
         }
 
         // GET: RepairOrder/Create

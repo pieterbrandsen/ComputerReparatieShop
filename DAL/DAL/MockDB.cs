@@ -7,7 +7,7 @@ using ComputerRepairShop.Classes.Helpers;
 
 namespace ComputerRepairShop.Data.DAL
 {
-    public class MockDB : IMockDB
+    public class MockDB : IReparatieShopData
     {
         List<RepairOrder> repairOrders;
 

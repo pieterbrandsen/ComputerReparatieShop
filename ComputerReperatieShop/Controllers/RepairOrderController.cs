@@ -12,11 +12,11 @@ namespace ComputerRepairShop.Web.Controllers
 {
     public class RepairOrderController : Controller
     {
-        IMockDB db;
+        private readonly IReparatieShopData db;
 
-        public RepairOrderController()
+        public RepairOrderController(IReparatieShopData db)
         {
-            db = new MockDB();
+            this.db = db;
         }
 
         // GET: RepairOrder

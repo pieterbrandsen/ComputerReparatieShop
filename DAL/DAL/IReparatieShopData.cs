@@ -5,13 +5,12 @@ using System.Text;
 
 namespace ComputerRepairShop.Data.DAL
 {
-    public interface IMockDB
+    public interface IReparatieShopData
     {
         IEnumerable<RepairOrder> GetAll();
         void Add(RepairOrder order);
         RepairOrder Get(int Id);
         void Delete(int id);
         void Update(RepairOrder repairOrder);
-        
     }
 }

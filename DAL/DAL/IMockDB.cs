@@ -11,6 +11,7 @@ namespace ComputerRepairShop.Data.DAL
         void Add(RepairOrder order);
         RepairOrder Get(int Id);
         void Delete(int id);
+        void Update(RepairOrder repairOrder);
         
     }
 }

@@ -23,7 +23,7 @@
     </div>
 </div>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
                 <th>@Html.DisplayNameFor(model => model.RepairOrders.FirstOrDefault().Name)</th>
@@ -36,7 +36,6 @@
         @foreach (var repairOrder in Model.RepairOrders)
         {
         <tbody>
-
             <tr>
                 <td>@repairOrder.Name</td>
                 <td style="text-align:center" class="@repairOrder.Status">@repairOrder.Status</td>

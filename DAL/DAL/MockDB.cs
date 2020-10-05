@@ -47,5 +47,14 @@ namespace ComputerRepairShop.Data.DAL
         {
             return repairOrders.OrderBy(r => r.EndDate.Ticks);
         }
+
+        public void Update(RepairOrder repairOrder)
+        {
+            var currOrder = Get(repairOrder.Id);
+            if(currOrder != null)
+            {
+                currOrder = repairOrder;
+            }
+        }
     }
 }

@@ -1,0 +1,2 @@
+C:\Users\Paul\Documents\Programming\ComputerReparatieShop\ComputerReparatieShop\ComputerReparatieShop.Data\obj\Debug\ReparatieShop.Data.csprojAssemblyReference.cache
+C:\Users\Paul\Documents\Programming\ComputerReparatieShop\ComputerReparatieShop\ComputerReparatieShop.Data\obj\Debug\ReparatieShop.Data.csproj.CoreCompileInputs.cache

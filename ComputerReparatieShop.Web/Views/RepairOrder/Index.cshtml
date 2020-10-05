@@ -1,0 +1,49 @@
+﻿@model ReparatieShop.Web.Models.RepairOrderViewModel
+@using ReparatieShop.Models
+@{
+    ViewBag.Title = "Repair orders";
+}
+
+<div id="Progress-Orders">
+    @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary Btn-Create" })
+    @foreach (var statusAmount in Model.statusCount)
+    {
+        <h4 style="display:inline">@statusAmount.Key : @statusAmount.Value </h4>
+    }
+
+    <div class="progress" style="margin-top:2px;">
+        @foreach (var statusAmount in Model.statusCount)
+        {
+            <div class="progress-bar @statusAmount.Key" role="progressbar" style="width: @((Convert.ToInt32(statusAmount.Value/(Model.statusCount.Count()*0.01)))+"%")" aria-valuenow="@statusAmount.Value" aria-valuemin="0" aria-valuemax="@(Model.statusCount.Count())"></div>
+        }
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.RepairOrders.FirstOrDefault().Name)</th>
+            <th>@Html.DisplayNameFor(model => model.RepairOrders.FirstOrDefault().Status)</th>
+            <th>@Html.DisplayNameFor(model => model.RepairOrders.FirstOrDefault().StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.RepairOrders.FirstOrDefault().EndDate)</th>
+            <th>Manage</th>
+        </tr>
+    </thead>
+    @foreach (var repairOrder in Model.RepairOrders)
+    {
+        <tbody>
+            <tr>
+                <td>@repairOrder.Name</td>
+                <td style="text-align:center" class="@repairOrder.Status">@repairOrder.Status</td>
+                <td @*class="@rowClass"*@>@repairOrder.StartDate</td>
+                <td @*class="@rowClass"*@>@repairOrder.EndDate</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = repairOrder.Id }, new { @class = "btn btn-outline-secondary" })
+                    @Html.ActionLink("Details", "Details", new { id = repairOrder.Id }, new { @class = "btn btn-outline-secondary" })
+                    @Html.ActionLink("Delete", "Delete", new { id = repairOrder.Id }, new { @class = "btn btn-outline-secondary" })
+                </td>
+            </tr>
+        </tbody>
+    }
+</table>
+

@@ -3,7 +3,7 @@
 }
 
 /*
-    RepairOrderStatus
+    RepairOrderStatus:
 */
 .Pending {
     background-color:brown;
@@ -16,4 +16,11 @@
 }
 .Done {
     background-color: coral;
+}
+
+/*
+    Repair view styling:
+*/
+.btn-Create {
+    margin-bottom : 7000px;
 }

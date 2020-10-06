@@ -37,7 +37,7 @@ namespace ComputerRepairShop.Web
                 user.UserName = "admin";
                 user.Email = "admin@admin.nl";
 
-                string userPWD = "Foo";//"AQAAAAEAACcQAAAAEC7vUlO2YPPjCAHhbTu4VWhY4fPF/p1lJqGE2X3tMjECNIaNaku8Eqo1exLzHAkwqw==";
+                string userPWD = "Foo";
 
                 var chkuser = UserManager.Create(user, userPWD);
 

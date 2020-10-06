@@ -1,5 +1,5 @@
-﻿using ComputerRepairShop.Helpers;
-using ComputerRepairShop.Models;
+﻿using ComputerRepairShop.ClassLibrary.Helpers;
+using ComputerRepairShop.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

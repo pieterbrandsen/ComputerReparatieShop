@@ -1,12 +1,12 @@
-﻿using ComputerRepairShop.ViewModels;
-using ComputerRepairShop.Models;
-using ComputerRepairShop.Helpers;
+﻿using ComputerRepairShop.Web.ViewModels;
+using ComputerRepairShop.Data.Models;
+using ComputerRepairShop.ClassLibrary.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ComputerRepairShop.Services;
+using ComputerRepairShop.Data.Services;
 
 namespace ComputerRepairShop.Web.Controllers
 {

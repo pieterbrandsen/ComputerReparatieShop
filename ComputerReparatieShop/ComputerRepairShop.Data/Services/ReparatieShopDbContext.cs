@@ -1,4 +1,4 @@
-﻿using ComputerRepairShop.Models;
+﻿using ComputerRepairShop.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

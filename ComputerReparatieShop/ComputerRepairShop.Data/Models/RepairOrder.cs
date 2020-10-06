@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ComputerRepairShop.Models
+namespace ComputerRepairShop.Data.Models
 {
     public class RepairOrder
     {

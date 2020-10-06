@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ComputerRepairShop.Helpers
+namespace ComputerRepairShop.ClassLibrary.Helpers
 {
     public enum RepairOrderStatus
     {

@@ -14,7 +14,10 @@
     <div class="progress" style="margin-top:2px;">
         @foreach (var statusAmount in Model.statusCount)
         {
+            if (Model.RepairOrders.Count() > 0)
+            {
             <div class="progress-bar @statusAmount.Key" role="progressbar" style="width: @((Convert.ToInt32(statusAmount.Value/(Model.RepairOrders.Count()*0.01)))+"%")" aria-valuenow="@statusAmount.Value" aria-valuemin="0" aria-valuemax="@(Model.statusCount.Count())"></div>
+            }
         }
     </div>
 </div>

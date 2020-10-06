@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ComputerRepairShop.ViewModels
+namespace ComputerRepairShop.Web.ViewModels
 {
     public class RepairOrderViewModel
     {

@@ -18,7 +18,6 @@ namespace ComputerRepairShop.Data.Services
         {
         }
         public DbSet<RepairOrder> RepairOrders { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         public static ApplicationDbContext Create()
         {

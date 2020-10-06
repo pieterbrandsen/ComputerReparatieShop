@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ComputerRepairShop.Data.Models;
+using ComputerRepairShop.Web.ViewModels;
 
 namespace ComputerRepairShop.Web.Controllers
 {

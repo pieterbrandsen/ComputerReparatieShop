@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
-namespace ComputerRepairShop.Data.Models
+namespace ComputerRepairShop.Web.ViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {

@@ -18,7 +18,7 @@ namespace ComputerRepairShop.Web.App_Start
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             //  Whenever swapping from restaurant data to a other source you can alter the type here.
             builder.RegisterType<SqlComputerRepairShopData>().As<IComputerRepairShopData>().InstancePerRequest();
-            builder.RegisterType<ComputerRepairShopDbContext>().InstancePerRequest();
+            builder.RegisterType<ApplicationDbContext>().InstancePerRequest();
             // Build the mapped IoC container:
             var container = builder.Build();
             // Pass the container to the dependency resolver, a class defined by the MVC5

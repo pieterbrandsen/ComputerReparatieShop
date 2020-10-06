@@ -119,12 +119,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\RepairOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ComputerRepairShopDbContext.cs" />
+    <Compile Include="Services\ApplicationDbContext.cs" />
     <Compile Include="Services\IComputerRepairShopData.cs" />
     <Compile Include="Services\SqlComputerRepairShopData .cs" />
   </ItemGroup>

@@ -10,9 +10,9 @@ namespace ComputerRepairShop.Data.Services
 {
     public class SqlComputerRepairShopData : IComputerRepairShopData
     {
-        private readonly ComputerRepairShopDbContext db;
+        private readonly ApplicationDbContext db;
 
-        public SqlComputerRepairShopData(ComputerRepairShopDbContext db)
+        public SqlComputerRepairShopData(ApplicationDbContext db)
         {
             this.db = db;
         }

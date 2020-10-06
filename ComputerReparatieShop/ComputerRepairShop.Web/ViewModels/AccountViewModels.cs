@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using Xunit.Sdk;
 using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace ComputerRepairShop.Data.Models

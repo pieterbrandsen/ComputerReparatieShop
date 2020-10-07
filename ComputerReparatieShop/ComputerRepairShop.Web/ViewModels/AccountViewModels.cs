@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
@@ -51,7 +52,7 @@ namespace ComputerRepairShop.Web.ViewModels
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Name")]
+        [Display(Name = "UserName")]
         public string Name { get; set; }
 
         [Required]
@@ -70,6 +71,8 @@ namespace ComputerRepairShop.Web.ViewModels
 
     public class RegisterViewModel
     {
+        public string DefaultRole = "Customer";
+
         [Required]
         [EmailAddress]
         [Display(Name = "Name")]

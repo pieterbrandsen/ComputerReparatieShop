@@ -30,6 +30,7 @@ namespace ComputerRepairShop.Web.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _context = new ApplicationDbContext();
         }
 
         public ApplicationSignInManager SignInManager
@@ -123,7 +124,7 @@ namespace ComputerRepairShop.Web.Controllers
             // The following code protects for brute force attacks against the two factor codes. 
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
+            // Configure the account lockout settings in IdentityConfig
             var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
@@ -160,6 +161,8 @@ namespace ComputerRepairShop.Web.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    // Default registration is "Customer":
+                    await UserManager.AddToRoleAsync(user.Id, model.DefaultRole);
                     
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -450,6 +453,7 @@ namespace ComputerRepairShop.Web.Controllers
             {
                 return Redirect(returnUrl);
             }
+            //  TODO: Redirect to "RepairOrderController\Index" for "Customer" or Overview page for "Admin","Mechanic" and "Manager".("Dashboard", "Home")
             return RedirectToAction("Index", "Home");
         }
 

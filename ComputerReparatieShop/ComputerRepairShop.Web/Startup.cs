@@ -64,7 +64,7 @@ namespace ComputerRepairShop.Web
         private ApplicationUser CreateAdminUser(RoleManager<IdentityRole> roleManager)
         {
             roleManager.Create(new IdentityRole() { Name = RoleNames.Admin });
-            return new ApplicationUser() { UserName = RoleNames.Admin, Email = "admin@admin.com", PasswordHash = "AQAAAAEAACcQAAAAEC7vUlO2YPPjCAHhbTu4VWhY4fPF/p1lJqGE2X3tMjECNIaNaku8Eqo1exLzHAkwqw==" };
+            return new ApplicationUser() { UserName = RoleNames.Admin, Email = "admin@admin.com", PasswordHash = "AEiskmtYlxYlSi1XPYIrF+NckSb2z4sBs+LiEj7mEndCOamyPZ+iPaufbpOsELwkpg==" };
         }
 
         private async Task CreateUniqueRoles(string[] allRoles, RoleManager<IdentityRole> roleManager)

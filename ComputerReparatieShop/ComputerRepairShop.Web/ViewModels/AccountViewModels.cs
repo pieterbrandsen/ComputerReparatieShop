@@ -51,12 +51,8 @@ namespace ComputerRepairShop.Web.ViewModels
 
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "UserName")]
-        public string Name { get; set; }
 
-        [Required]
-        [Display(Name = "Name")]
+        [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -74,7 +70,7 @@ namespace ComputerRepairShop.Web.ViewModels
         public string DefaultRole = "Customer";
 
         [Required]
-        [EmailAddress]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         [Display(Name = "Name")]
         public string Name { get; set; }
 

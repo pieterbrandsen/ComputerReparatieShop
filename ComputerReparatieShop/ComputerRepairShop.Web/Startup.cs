@@ -26,8 +26,6 @@ namespace ComputerRepairShop.Web
             InitRolesAndUsers();
         }
 
-        //  Admin password:
-        private string GetPass() => "Foo";
         //  Define roles:
         private string[] GetRoles() => new[] { RoleNames.Admin, RoleNames.Customer, RoleNames.Technician };
 
@@ -49,17 +47,16 @@ namespace ComputerRepairShop.Web
 
         private async Task CheckForAdmin(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            var roleExist = await roleManager.RoleExistsAsync("Admin");
-            if (!roleExist)
+            var findAdmin = userManager.FindByName(RoleNames.Admin);
+            if (findAdmin == null)
             {
                 // Create first Admin role and create a default admin user
                 ApplicationUser admin = CreateAdminUser(roleManager);
 
                 // IdentityResult ValidateUser = UserManager.Create(admin, userPWD);
-                IdentityResult userResult = await userManager.CreateAsync(admin, GetPass());
-                if (userResult.Succeeded)
+                if (await userManager.CreateAsync(admin) == IdentityResult.Success)
                 {
-                    await userManager.AddToRoleAsync(admin.Id, "Admin");
+                    await userManager.AddToRoleAsync(admin.Id, RoleNames.Admin);
                 }
             }
         }
@@ -67,7 +64,7 @@ namespace ComputerRepairShop.Web
         private ApplicationUser CreateAdminUser(RoleManager<IdentityRole> roleManager)
         {
             roleManager.Create(new IdentityRole() { Name = RoleNames.Admin });
-            return new ApplicationUser() { UserName = RoleNames.Admin, Email = "admin@admin.com" };
+            return new ApplicationUser() { UserName = RoleNames.Admin, Email = "admin@admin.com", PasswordHash = "AQAAAAEAACcQAAAAEC7vUlO2YPPjCAHhbTu4VWhY4fPF/p1lJqGE2X3tMjECNIaNaku8Eqo1exLzHAkwqw==" };
         }
 
         private async Task CreateUniqueRoles(string[] allRoles, RoleManager<IdentityRole> roleManager)

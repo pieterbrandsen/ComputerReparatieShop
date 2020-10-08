@@ -1,4 +1,5 @@
 ﻿
+using ComputerRepairShop.ClassLibrary.Const;
 using ComputerRepairShop.Data.Models;
 using ComputerRepairShop.Data.Services;
 using Microsoft.Ajax.Utilities;
@@ -28,7 +29,7 @@ namespace ComputerRepairShop.Web
         //  Admin password:
         private string GetPass() => "Foo";
         //  Define roles:
-        private string[] GetRoles() => new[] { "Manager", "Technician" };
+        private string[] GetRoles() => new[] { RoleNames.Admin, RoleNames.Customer, RoleNames.Technician };
 
 
         private async void InitRolesAndUsers()
@@ -40,43 +41,44 @@ namespace ComputerRepairShop.Web
             string[] storeRoles = GetRoles();
             //  Business people:
             await CreateUniqueRoles(storeRoles, roleManager);
-            //  Create first Admin role and create a default admin user:
-            //if (!roleManager.RoleExists("Admin"))
-            //{
-            //    AdminLoginProcess(userManager, roleManager);
-            //}
+            await CheckForAdmin(userManager, roleManager);
         }
 
 
         #region Init functions
 
-        private void AdminLoginProcess(UserManager<ApplicationUser> umanager, RoleManager<IdentityRole> rmanager)
+        private async Task CheckForAdmin(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            ApplicationUser admin = CreateAdminUser(rmanager);
-
-            // IdentityResult ValidateUser = UserManager.Create(admin, userPWD);
-            if (umanager.Create(admin, GetPass()).Succeeded)
+            var roleExist = await roleManager.RoleExistsAsync("Admin");
+            if (!roleExist)
             {
-                IdentityResult result = umanager.AddToRole(admin.Id, "Admin");
+                // Create first Admin role and create a default admin user
+                ApplicationUser admin = CreateAdminUser(roleManager);
+
+                // IdentityResult ValidateUser = UserManager.Create(admin, userPWD);
+                IdentityResult userResult = await userManager.CreateAsync(admin, GetPass());
+                if (userResult.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(admin.Id, "Admin");
+                }
             }
         }
 
-        private ApplicationUser CreateAdminUser(RoleManager<IdentityRole> manager)
+        private ApplicationUser CreateAdminUser(RoleManager<IdentityRole> roleManager)
         {
-            manager.Create(new IdentityRole() { Name = "Admin" });
-            return new ApplicationUser() { UserName = "Admin", Email = "admin@admin.com" };
+            roleManager.Create(new IdentityRole() { Name = RoleNames.Admin });
+            return new ApplicationUser() { UserName = RoleNames.Admin, Email = "admin@admin.com" };
         }
 
-        private async Task CreateUniqueRoles(string[] allRoles, RoleManager<IdentityRole> manager)
+        private async Task CreateUniqueRoles(string[] allRoles, RoleManager<IdentityRole> roleManager)
         {
-            IdentityResult roleResult;
 
             foreach (string role in allRoles)
             {
-                var roleExist = await manager.RoleExistsAsync(role);
+                var roleExist = await roleManager.RoleExistsAsync(role);
                 if (!roleExist)
                 {
-                    roleResult = await manager.CreateAsync(new IdentityRole() { Name = role });
+                    await roleManager.CreateAsync(new IdentityRole() { Name = role });
                 }
             }
         }

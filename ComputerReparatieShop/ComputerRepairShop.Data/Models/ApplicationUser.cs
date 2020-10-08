@@ -9,11 +9,9 @@ namespace ComputerRepairShop.Data.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public class userDbContext : IdentityDbContext<ApplicationUser>
+        public class UserDbContext : IdentityDbContext<ApplicationUser>
         {
-            public string newName { get; set; }
-            public string Description { get; set; }
-            public userDbContext() : base("DefaultConnection")
+            public UserDbContext() : base("DefaultConnection")
             {
 
             }

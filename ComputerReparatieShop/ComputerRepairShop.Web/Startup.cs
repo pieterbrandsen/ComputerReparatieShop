@@ -20,63 +20,63 @@ namespace ComputerRepairShop.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            InitRolesAndUsers();
+            //InitRolesAndUsers();
         }
 
-        //  Admin password:
-        private string GetPass() => "Foo";
-        //  Define roles:
-        private string[] GetRoles() => new[] { "Manager", "Technician" };
+        ////  Admin password:
+        //private string GetPass() => "Foo";
+        ////  Define roles:
+        //private string[] GetRoles() => new[] { "Manager", "Technician" };
         
 
-        private void InitRolesAndUsers()
-        {
-            var context = new ApplicationDbContext();
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+        //private void InitRolesAndUsers()
+        //{
+        //    var context = new ApplicationDbContext();
+        //    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+        //    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            string[] storeRoles = GetRoles();
-            //  Business people:
-            CreateUniqueRoles(storeRoles, roleManager);
-            //  Create first Admin role and create a default admin user:
-            if (!roleManager.RoleExists("Admin"))
-            {
-                AdminLoginProcess(userManager, roleManager);
-            }
-        }
+        //    string[] storeRoles = GetRoles();
+        //    //  Business people:
+        //    CreateUniqueRoles(storeRoles, roleManager);
+        //    //  Create first Admin role and create a default admin user:
+        //    if (!roleManager.RoleExists("Admin"))
+        //    {
+        //        AdminLoginProcess(userManager, roleManager);
+        //    }
+        //}
 
 
-        #region Init functions
+        //#region Init functions
 
-        private void AdminLoginProcess(UserManager<ApplicationUser> umanager, RoleManager<IdentityRole> rmanager)
-        {
-            ApplicationUser admin = CreateAdminUser(rmanager);
+        //private void AdminLoginProcess(UserManager<ApplicationUser> umanager, RoleManager<IdentityRole> rmanager)
+        //{
+        //    ApplicationUser admin = CreateAdminUser(rmanager);
 
-            // IdentityResult ValidateUser = UserManager.Create(admin, userPWD);
-            if (umanager.Create(admin, GetPass()).Succeeded)
-            {
-                IdentityResult result = umanager.AddToRole(admin.Id, "Admin");
-            }
-        }
+        //    // IdentityResult ValidateUser = UserManager.Create(admin, userPWD);
+        //    if (umanager.Create(admin, GetPass()).Succeeded)
+        //    {
+        //        IdentityResult result = umanager.AddToRole(admin.Id, "Admin");
+        //    }
+        //}
 
-        private ApplicationUser CreateAdminUser(RoleManager<IdentityRole> manager)
-        {
-            manager.Create(new IdentityRole() { Name = "Admin" });
-            return new ApplicationUser() { UserName = "Admin", Email = "admin@admin.com" };
-        }
+        //private ApplicationUser CreateAdminUser(RoleManager<IdentityRole> manager)
+        //{
+        //    manager.Create(new IdentityRole() { Name = "Admin" });
+        //    return new ApplicationUser() { UserName = "Admin", Email = "admin@admin.com" };
+        //}
 
-        private void CreateUniqueRoles(string[] allRoles, RoleManager<IdentityRole> manager)
-        {
-            foreach (string role in allRoles)
-            {
-                if (!manager.RoleExists(role))
-                {
-                    manager.Create(new IdentityRole() { Name = role });
-                }
-            }
-        }
+        //private void CreateUniqueRoles(string[] allRoles, RoleManager<IdentityRole> manager)
+        //{
+        //    foreach (string role in allRoles)
+        //    {
+        //        if (!manager.RoleExists(role))
+        //        {
+        //            manager.Create(new IdentityRole() { Name = role });
+        //        }
+        //    }
+        //}
 
-        #endregion
+        //#endregion
 
 
     }

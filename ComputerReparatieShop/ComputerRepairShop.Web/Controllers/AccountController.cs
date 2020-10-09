@@ -58,6 +58,12 @@ namespace ComputerRepairShop.Web.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,Mechanic")]
+        public ActionResult DashBoard(LoginViewModel model, string returnUrl)
+        {
+            return View(model);
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -82,13 +88,14 @@ namespace ComputerRepairShop.Web.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             ApplicationUser signedUser = UserManager.FindByEmail(model.Email);
+            var tmpUser = await UserManager.FindAsync(signedUser.UserName, model.Password);
             var result = await SignInManager.PasswordSignInAsync(signedUser.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
-                case SignInStatus.Success:
-                    return User.IsInRole(RoleNames.Customer) ?
-                        RedirectToAction("Index", "RepairOrder") :
-                        RedirectToAction("Index", "Home");
+                case SignInStatus.Success: 
+                    return UserManager.IsInRole(signedUser.Id, RoleNames.Customer) ?
+                          RedirectToAction("Index", "RepairOrder") :
+                          RedirectToAction("Index", "Role");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

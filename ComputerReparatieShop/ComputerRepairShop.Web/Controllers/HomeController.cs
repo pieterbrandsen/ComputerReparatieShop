@@ -47,6 +47,12 @@ namespace ComputerRepairShop.Web.Controllers
 
             return View();
         }
+        [Authorize]
+        public ActionResult DashBoard()
+         {
+            var model = User;
+            return View();
+        }
 
         #region Helper methods for Actions:
 

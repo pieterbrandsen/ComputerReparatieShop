@@ -19,7 +19,9 @@ namespace ComputerRepairShop.Data.Models
             public DateTime EndDate { get; set; }
             [Required]
             public RepairOrderStatus Status { get; set; }
-            public string Description { get; set; }
+            public string Description_Client { get; set; }
+          /*  public string Description_Mechanic { get; set; }
+            public string Assigned { get; set; }*/
             //  public bool Visible { get; set; }
     }
 }

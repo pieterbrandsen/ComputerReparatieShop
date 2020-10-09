@@ -12,16 +12,16 @@ using ComputerRepairShop.Data.Services.ISqlCommands;
 
 namespace ComputerRepairShop.Web.Controllers
 {
-    public class CustomersController : Controller
+    public class TechnicanController : Controller
     {
-        private ICustomerSql db;
+        private ITechnicanSql db;
 
-        public CustomersController(ICustomerSql db)
+        public TechnicanController(ITechnicanSql db)
         {
             this.db = db;
         }
 
-        // GET: Customers
+        // GET: Technicans
         public ActionResult Index()
         {
             var customers = db.GetAll();
@@ -29,7 +29,7 @@ namespace ComputerRepairShop.Web.Controllers
             return View(customers);
         }
 
-        // GET: Customers/Details/5
+        // GET: Technicans/Details/5
         public ActionResult Details(string id)
         {
             var model = db.Get(id);
@@ -40,24 +40,24 @@ namespace ComputerRepairShop.Web.Controllers
             return View(model);
         }
 
-        // GET: Customers/Create
+        // GET: Technicans/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: Technicans/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Customer customer, FormCollection collection)
+        public ActionResult Create(Technican technican, FormCollection collection)
         {
-            db.Add(customer);
+            db.Add(technican);
             return RedirectToAction("Index");
         }
 
-        // GET: Customers/Edit/5
+        // GET: Technicans/Edit/5
         public ActionResult Edit(string id)
         {
             var model = db.Get(id);
@@ -68,18 +68,18 @@ namespace ComputerRepairShop.Web.Controllers
             return View(model);
         }
 
-        // POST: Customers/Edit/5
+        // POST: Technicans/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,HomeTown,Age,YearOfbirth,OpenOrders,ClosedOrders,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,FullName,HomeTown,Age,YearOfbirth,RegisterDate,OpenOrders,ClosedOrders,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Wage,Level")] Technican technican)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Update(customer);
+                    db.Update(technican);
                     // TODO: Uncomment "Details" redirect when implemented
                     // return RedirectToAction("Details", new { id = repairOrder.Id });
                     return RedirectToAction("Index");
@@ -89,10 +89,10 @@ namespace ComputerRepairShop.Web.Controllers
                     return View();
                 }
             }
-            return View(customer);
+            return View(technican);
         }
 
-        // GET: Customers/Delete/5
+        // GET: Technicans/Delete/5
         public ActionResult Delete(string id)
         {
             var model = db.Get(id);
@@ -103,7 +103,7 @@ namespace ComputerRepairShop.Web.Controllers
             return View(model);
         }
 
-        // POST: Customers/Delete/5
+        // POST: Technicans/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

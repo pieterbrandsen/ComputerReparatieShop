@@ -21,6 +21,7 @@ namespace ComputerRepairShop.Web.App_Start
             //  Whenever swapping from restaurant data to a other source you can alter the type here.
             builder.RegisterType<RepairOrderSql>().As<IRepairOrderSql>().InstancePerRequest();
             builder.RegisterType<CustomerSql>().As<ICustomerSql>().InstancePerRequest();
+            builder.RegisterType<TechnicanSql>().As<ITechnicanSql>().InstancePerRequest();
             builder.RegisterType<ApplicationDbContext>().InstancePerRequest();
             // Build the mapped IoC container:
             var container = builder.Build();

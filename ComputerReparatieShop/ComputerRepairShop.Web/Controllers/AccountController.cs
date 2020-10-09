@@ -166,7 +166,7 @@ namespace ComputerRepairShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new Customer { 
+                var user = new Technican { 
                     UserName = model.Name, 
                     Email = model.Email, 
                     YearOfbirth = DateTime.Now, 

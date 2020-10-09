@@ -1,5 +1,7 @@
-﻿using ComputerRepairShop.Data.Models;
+﻿using ComputerRepairShop.ClassLibrary.Const;
+using ComputerRepairShop.Data.Models;
 using ComputerRepairShop.Data.Services.ISqlCommands;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

@@ -166,7 +166,12 @@ namespace ComputerRepairShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Name, Email = model.Email, YearOfbirth = DateTime.Now, RegisterDate = DateTime.Now };
+                var user = new Customer { 
+                    UserName = model.Name, 
+                    Email = model.Email, 
+                    YearOfbirth = DateTime.Now, 
+                    RegisterDate = DateTime.Now 
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

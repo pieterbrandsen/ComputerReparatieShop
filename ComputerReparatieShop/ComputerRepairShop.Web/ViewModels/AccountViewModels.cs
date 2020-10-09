@@ -52,11 +52,11 @@ namespace ComputerRepairShop.Web.ViewModels
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "Username")]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Name")]
+        [Display(Name = "E-mail")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -74,7 +74,6 @@ namespace ComputerRepairShop.Web.ViewModels
         public string DefaultRole = "Customer";
 
         [Required]
-        [EmailAddress]
         [Display(Name = "Name")]
         public string Name { get; set; }
 

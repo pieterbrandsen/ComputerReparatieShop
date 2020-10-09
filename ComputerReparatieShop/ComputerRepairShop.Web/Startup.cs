@@ -38,9 +38,8 @@ namespace ComputerRepairShop.Web
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            string[] storeRoles = GetRoles();
             //  Business people:
-            await CreateUniqueRoles(storeRoles, roleManager);
+            await CreateUniqueRoles(GetRoles(), roleManager);
             await CheckForAdmin(userManager, roleManager);
         }
 
@@ -52,7 +51,7 @@ namespace ComputerRepairShop.Web
             var roleExist = await roleManager.RoleExistsAsync("Admin");
             if (!roleExist)
             {
-                // Create first Admin role and create a default admin user
+                // Create first Admin role as default user.
                 ApplicationUser admin = CreateAdminUser(roleManager);
 
                 // IdentityResult ValidateUser = UserManager.Create(admin, userPWD);

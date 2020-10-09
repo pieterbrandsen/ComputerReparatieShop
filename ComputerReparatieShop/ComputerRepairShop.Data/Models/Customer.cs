@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputerRepairShop.Data.Models
 {
-    class Customer
+    public class Customer : ApplicationUser
     {
     }
 }

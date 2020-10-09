@@ -10,15 +10,19 @@ namespace ComputerRepairShop.Data.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public string FullName { get; set; }
+        public string HomeTown { get; set; }
+        public int Age { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime YearOfbirth { get; set; }
+
+        public string OpenOrders { get; set; }
+        public string ClosedOrders { get; set; }
+        public string TotalOrders => $"{OpenOrders} {ClosedOrders}";
+
         public class UserDbContext : IdentityDbContext<ApplicationUser>
         {
-            public string FullName { get; set; }
-
-            [DataType(DataType.Date)]
-            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-            [Required]
-            public DateTime YearOfbirth { get; set; }
-            public int Age { get; set; }
             public UserDbContext() : base("DefaultConnection")
             {
 

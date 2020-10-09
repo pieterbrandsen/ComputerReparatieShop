@@ -17,8 +17,13 @@ namespace ComputerRepairShop.Data.Services
     : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        // Orders 
         public DbSet<RepairOrder> RepairOrders { get; set; }
-     
+
+        // Users
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Technican> Technicians { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

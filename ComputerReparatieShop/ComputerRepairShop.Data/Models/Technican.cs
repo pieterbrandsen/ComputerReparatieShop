@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ComputerRepairShop.Data.Models
 {
-    class Technican
+    public class Technican : ApplicationUser
     {
+        public int Wage { get; set; }
+        public int Level { get; set; }
     }
 }

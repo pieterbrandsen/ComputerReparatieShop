@@ -23,7 +23,5 @@ namespace ComputerRepairShop.Data.Services
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<ComputerRepairShop.Data.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

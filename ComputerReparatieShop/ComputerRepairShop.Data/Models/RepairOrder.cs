@@ -27,17 +27,17 @@ namespace ComputerRepairShop.Data.Models
             //public Mechanic Assigned { get; set; }
     }
 
-    public class Person
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
+    //public class Person
+    //{
+    //    public int Id { get; set; }
+    //    public string Name { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        [Required]
-        public DateTime YearOfbirth { get; set; }
-        public int age { get; set; }
-    }
+    //    [DataType(DataType.Date)]
+    //    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+    //    [Required]
+    //    public DateTime YearOfbirth { get; set; }
+    //    public int age { get; set; }
+    //}
 
 /*    public class Mechanic : Person
     {

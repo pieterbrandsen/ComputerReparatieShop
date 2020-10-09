@@ -129,7 +129,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\RepairOrder.cs" />
+    <Compile Include="Models\Technican.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationDbContext.cs" />
     <Compile Include="Services\IComputerRepairShopData.cs" />

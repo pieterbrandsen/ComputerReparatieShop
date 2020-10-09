@@ -68,7 +68,6 @@ namespace ComputerRepairShop.Web
 
         private async Task CreateUniqueRoles(string[] allRoles, RoleManager<IdentityRole> roleManager)
         {
-
             foreach (string role in allRoles)
             {
                 var roleExist = await roleManager.RoleExistsAsync(role);

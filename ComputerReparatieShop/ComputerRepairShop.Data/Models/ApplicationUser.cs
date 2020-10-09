@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -11,6 +12,13 @@ namespace ComputerRepairShop.Data.Models
     {
         public class UserDbContext : IdentityDbContext<ApplicationUser>
         {
+            public string FullName { get; set; }
+
+            [DataType(DataType.Date)]
+            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+            [Required]
+            public DateTime YearOfbirth { get; set; }
+            public int Age { get; set; }
             public UserDbContext() : base("DefaultConnection")
             {
 

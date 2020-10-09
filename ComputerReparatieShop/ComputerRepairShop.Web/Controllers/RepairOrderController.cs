@@ -6,15 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ComputerRepairShop.Data.Services;
+using ComputerRepairShop.Data.Services.SqlCommands;
+using ComputerRepairShop.Data.Services.ISqlCommands;
 
 namespace ComputerRepairShop.Web.Controllers
 {
     public class RepairOrderController : Controller
     {
-        private IComputerRepairShopData db;
+        private IRepairOrderSql db;
 
-        public RepairOrderController(IComputerRepairShopData db)
+        public RepairOrderController(IRepairOrderSql db)
         {
             this.db = db;
         }

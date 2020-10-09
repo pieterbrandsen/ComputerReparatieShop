@@ -16,6 +16,9 @@ namespace ComputerRepairShop.Data.Models
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime YearOfbirth { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime RegisterDate { get; set; }
 
         public string OpenOrders { get; set; }
         public string ClosedOrders { get; set; }

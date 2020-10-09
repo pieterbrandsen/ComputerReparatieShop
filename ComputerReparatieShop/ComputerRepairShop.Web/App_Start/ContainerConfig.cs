@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using ComputerRepairShop.Data.Services;
+using ComputerRepairShop.Data.Services.ISqlCommands;
+using ComputerRepairShop.Data.Services.SqlCommands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,8 @@ namespace ComputerRepairShop.Web.App_Start
             // Extension method of the Container builder accepting undefined amount of Reflection.Assembly specifications to apply.
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             //  Whenever swapping from restaurant data to a other source you can alter the type here.
-            builder.RegisterType<SqlComputerRepairShopData>().As<IComputerRepairShopData>().InstancePerRequest();
+            builder.RegisterType<RepairOrderSql>().As<IRepairOrderSql>().InstancePerRequest();
+            builder.RegisterType<CustomerSql>().As<ICustomerSql>().InstancePerRequest();
             builder.RegisterType<ApplicationDbContext>().InstancePerRequest();
             // Build the mapped IoC container:
             var container = builder.Build();

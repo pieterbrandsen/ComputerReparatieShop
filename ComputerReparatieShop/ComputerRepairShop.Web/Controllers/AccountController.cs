@@ -88,14 +88,13 @@ namespace ComputerRepairShop.Web.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             ApplicationUser signedUser = UserManager.FindByEmail(model.Email);
-            var tmpUser = await UserManager.FindAsync(signedUser.UserName, model.Password);
             var result = await SignInManager.PasswordSignInAsync(signedUser.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success: 
                     return UserManager.IsInRole(signedUser.Id, RoleNames.Customer) ?
                           RedirectToAction("Index", "RepairOrder") :
-                          RedirectToAction("Index", "Role");
+                          RedirectToAction("Dashboard", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

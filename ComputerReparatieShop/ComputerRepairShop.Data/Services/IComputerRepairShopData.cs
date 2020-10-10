@@ -10,6 +10,7 @@ namespace ComputerRepairShop.Data.Services
     public interface IComputerRepairShopData
     {
         IEnumerable<RepairOrder> GetAll();
+        IEnumerable<RepairOrder> GetByRole();
         void Add(RepairOrder order);
         RepairOrder Get(int Id);
         void Delete(int id);

@@ -41,6 +41,11 @@ namespace ComputerRepairShop.Data.Services
                    orderby r.StartDate
                    select r;
         }
+        // TODO: Implement get by role after enabling machanic assignment to orders.
+        public IEnumerable<RepairOrder> GetByRole()
+        {
+            throw new NotImplementedException();
+        }
 
         public void Update(RepairOrder repairOrder)
         {

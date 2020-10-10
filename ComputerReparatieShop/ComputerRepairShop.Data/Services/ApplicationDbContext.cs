@@ -18,10 +18,12 @@ namespace ComputerRepairShop.Data.Services
         {
         }
         public DbSet<RepairOrder> RepairOrders { get; set; }
-
+     
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ComputerRepairShop.Data.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

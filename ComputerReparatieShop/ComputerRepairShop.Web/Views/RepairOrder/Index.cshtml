@@ -10,14 +10,15 @@
     {
         <h4 style="display:inline">@statusAmount.Key : @statusAmount.Value, </h4>
     }
-
+    @*TODO: Move progress bar to partial, all not customer*@
+@*@Html.Partial("_ProgressBar")*@
     <div class="progress" style="margin-top:2px;">
         @foreach (var statusAmount in Model.statusCount)
         {
-            if (Model.RepairOrders.Count() > 0)
+              if (Model.RepairOrders.Count() > 0)
             {
-                <div class="progress-bar @statusAmount.Key" role="progressbar" style="width: @((Convert.ToInt32(statusAmount.Value/(Model.RepairOrders.Count()*0.01)))+"%")" aria-valuenow="@statusAmount.Value" aria-valuemin="0" aria-valuemax="@(Model.statusCount.Count())"></div>
-            }
+                                <div class="progress-bar @statusAmount.Key" role="progressbar" style="width: @((Convert.ToInt32(statusAmount.Value/(Model.RepairOrders.Count()*0.01)))+"%")" aria-valuenow="@statusAmount.Value" aria-valuemin="0" aria-valuemax="@(Model.statusCount.Count())"></div>
+                        }
         }
     </div>
 </div>

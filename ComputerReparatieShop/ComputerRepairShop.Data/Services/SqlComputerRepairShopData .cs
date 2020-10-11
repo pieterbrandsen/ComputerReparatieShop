@@ -14,9 +14,11 @@ namespace ComputerRepairShop.Data.Services
 
 
         // TODO: Implement get by role after enabling machanic assignment to orders.
-        public IEnumerable<RepairOrder> GetByRole()
+        public IEnumerable<RepairOrder> GetByRole(string id)
         {
-            throw new NotImplementedException();
+            return from r in db.RepairOrders
+                   where r.TechnicanId == id
+                   select r;
         }
     }
 }

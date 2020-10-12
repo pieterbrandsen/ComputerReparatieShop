@@ -16,13 +16,19 @@ namespace ComputerRepairShop.Web.ViewModels
         {
             RepairOrders = userIdOrder;
             StatusCount = new Dictionary<RepairOrderStatus, int>();
-            foreach (var statData in RepairOrders.Select(v => v.Status).GroupBy(sType => sType).Select(status => (name: status.Key, count: status.Count())))
+            foreach (var statData in RepairOrders.Select(order => order.Status).GroupBy(sType => sType).Select(status => (name: status.Key, count: status.Count())))
             {
-                if (StatusCount.ContainsKey(statData.name))
-                    StatusCount[statData.name] += statData.count;
-                else if (Enum.IsDefined(typeof(RepairOrderStatus), statData.name))
-                    StatusCount.Add(statData.name, statData.count);
+                        StatusCount.Add(statData.name, statData.count);
             }
+            if (StatusCount.Count() < Enum.GetValues(typeof(RepairOrderStatus)).Length)
+            {
+                foreach (var status in Enum.GetValues(typeof(RepairOrderStatus)))
+                {
+                    if (!StatusCount.ContainsKey((RepairOrderStatus)status))
+                        StatusCount.Add((RepairOrderStatus)status, 0);
+
+                }
+            }    
         }
     }
 }

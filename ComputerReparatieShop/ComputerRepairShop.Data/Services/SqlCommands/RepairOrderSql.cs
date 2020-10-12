@@ -16,7 +16,7 @@ namespace ComputerRepairShop.Data.Services.ISqlCommands
         RepairOrder Get(int Id);
         void Delete(int id);
         void Update(RepairOrder repairOrder);
-        IEnumerable<RepairOrder> GetById(string id);
+        IEnumerable<RepairOrder> GetByCustomerId(string id);
     }
 }
 namespace ComputerRepairShop.Data.Services.SqlCommands
@@ -47,7 +47,7 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
             return db.RepairOrders.FirstOrDefault(r => r.Id == id);
         }
 
-        public IEnumerable<RepairOrder> GetById(string id)
+        public IEnumerable<RepairOrder> GetByCustomerId(string id)
         {
             return from r in db.RepairOrders
                    where r.CustomerId == id

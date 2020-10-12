@@ -28,7 +28,7 @@ namespace ComputerRepairShop.Web.Controllers
         [Authorize]
         public ActionResult Index(string id)
         {
-            var model = new RepairOrderViewModel(db.GetById(User.Identity.GetUserId()));
+            var model = new RepairOrderViewModel(db.GetByCustomerId(User.Identity.GetUserId()));
 
           /*          
            *Refactored and moved to view model:

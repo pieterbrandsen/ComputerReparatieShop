@@ -66,7 +66,7 @@ namespace ComputerRepairShop.Web.Controllers
                                  db.GetByEmployeeId(User.Identity.GetUserId()) :
                                  db.GetAll();
 
-            var model = new RepairOrderViewModel(selectedOrders);
+            var model = new RepairOrderPostViewModel(selectedOrders);
 
             return View(model);
         }

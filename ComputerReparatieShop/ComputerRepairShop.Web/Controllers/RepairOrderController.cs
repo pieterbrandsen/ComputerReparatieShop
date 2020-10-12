@@ -10,6 +10,8 @@ using ComputerRepairShop.Data.Services.SqlCommands;
 using ComputerRepairShop.Data.Services.ISqlCommands;
 using Microsoft.AspNet.Identity;
 using System.ComponentModel;
+using System.Data.Entity.Core.Metadata.Edm;
+using Microsoft.Ajax.Utilities;
 
 namespace ComputerRepairShop.Web.Controllers
 {
@@ -26,20 +28,19 @@ namespace ComputerRepairShop.Web.Controllers
         [Authorize]
         public ActionResult Index(string id)
         {
+            var model = new RepairOrderViewModel(db.GetById(User.Identity.GetUserId()));
+
+          /*          
+           *Refactored and moved to view model:
+           *
             IEnumerable<RepairOrder> repairOrders = db.GetByRole(User.Identity.GetUserId());
             IDictionary<RepairOrderStatus, int> statusCount = new Dictionary<RepairOrderStatus, int>();
 
-            foreach (RepairOrderStatus stat in Enum.GetValues(typeof(RepairOrderStatus)))
-            {
-                    statusCount.Add(stat, 0);
-            }
-            
-            RepairOrder switch
-            {
-                RepairOrder c
-            }
-            var t = repairOrders.GroupBy(order => statusCount[order.Status]++);
-            //repairOrders.GroupBy(order => statusCount[order.Status]++);
+            statusCount.Add(RepairOrderStatus.Done, 0);
+            statusCount.Add(RepairOrderStatus.Pending, 0);
+            statusCount.Add(RepairOrderStatus.Underway, 0);
+            statusCount.Add(RepairOrderStatus.WaitingForParts, 0);
+
             foreach (var repairOrder in repairOrders)
             {
                 switch (repairOrder.Status)
@@ -60,10 +61,9 @@ namespace ComputerRepairShop.Web.Controllers
                         break;
                 }
             }
-            var model = new RepairOrderViewModel();
-
             model.RepairOrders = repairOrders;
-            model.statusCount = statusCount;
+            model.StatusCount = statusCount;
+            */
             return View(model);
         }
 

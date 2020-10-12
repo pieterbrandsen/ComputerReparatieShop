@@ -1,0 +1,17 @@
+﻿
+.Pending {
+    background-color: #f1e189;
+}
+
+.WaitingForParts {
+    background-color: #f39233;
+}
+
+.Underway {
+    background-color: #01c5c4;
+}
+
+
+.Done {
+    background-color: #b8de6f;
+}

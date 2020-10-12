@@ -116,7 +116,6 @@
   <ItemGroup>
     <Compile Include="Const\roleNames.cs" />
     <Compile Include="Helpers\RepairOrderStatusEnum.cs" />
-    <Compile Include="Helpers\RoleCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

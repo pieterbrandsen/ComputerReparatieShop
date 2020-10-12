@@ -13,7 +13,7 @@ namespace ComputerRepairShop.Data.Services.ISqlCommands
     {
         IEnumerable<RepairOrder> GetAll();
         void Add(RepairOrder order);
-        RepairOrder Get(int Id);
+        RepairOrder GetByOrderId(int Id);
         void Delete(int id);
         void Update(RepairOrder repairOrder);
         IEnumerable<RepairOrder> GetByCustomerId(string id);
@@ -42,7 +42,7 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
             db.SaveChanges();
         }
 
-        public RepairOrder Get(int id)
+        public RepairOrder GetByOrderId(int id)
         {
             return db.RepairOrders.FirstOrDefault(r => r.Id == id);
         }

@@ -58,12 +58,6 @@ namespace ComputerRepairShop.Web.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin,Mechanic")]
-        public ActionResult DashBoard(LoginViewModel model, string returnUrl)
-        {
-            return View(model);
-        }
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -91,10 +85,12 @@ namespace ComputerRepairShop.Web.Controllers
             var result = await SignInManager.PasswordSignInAsync(signedUser.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
-                case SignInStatus.Success: 
+                case SignInStatus.Success:
                     return UserManager.IsInRole(signedUser.Id, RoleNames.Customer) ?
                           RedirectToAction("Index", "RepairOrder") :
-                          RedirectToAction("Dashboard", "Home");
+                          RedirectToAction("Index", "RepairOrder");
+                          //TODO: Finish dashboard.
+                         // RedirectToAction("Dashboard", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -154,7 +150,9 @@ namespace ComputerRepairShop.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var model = new RegisterViewModel();
+            model.AvailableRoles = _context.Roles.Select(n => n.Name.ToString());
+            return View(model);
         }
 
         //
@@ -166,18 +164,21 @@ namespace ComputerRepairShop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new Technican { 
-                    UserName = model.Name, 
-                    Email = model.Email, 
-                    YearOfbirth = DateTime.Now, 
-                    RegisterDate = DateTime.Now 
+                var user = new ApplicationUser
+                {
+                    UserName = model.Name,
+                    Email = model.Email,
+                    YearOfbirth = model.YearOfbirth,
+                    Age = DateTime.Now.Year - model.YearOfbirth.Year,
+                    RegisterDate = DateTime.Now
                 };
+                var rolepls = model.AssignedRole;
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     // Default registration is "Customer":
-                    await UserManager.AddToRoleAsync(user.Id, model.DefaultRole);
+                    await UserManager.AddToRoleAsync(user.Id, rolepls);
                     
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -188,6 +189,8 @@ namespace ComputerRepairShop.Web.Controllers
                 }
                 AddErrors(result);
             }
+            model = new RegisterViewModel();
+            model.AvailableRoles = _context.Roles.Select(n => n.Name.ToString());
             return View(model);
         }
 

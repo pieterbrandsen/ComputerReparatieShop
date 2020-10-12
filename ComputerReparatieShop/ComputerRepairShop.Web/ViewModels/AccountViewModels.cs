@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
+using ComputerRepairShop.ClassLibrary.Const;
+using System.CodeDom;
 
 namespace ComputerRepairShop.Web.ViewModels
 {
@@ -67,7 +70,9 @@ namespace ComputerRepairShop.Web.ViewModels
 
     public class RegisterViewModel
     {
-        public string DefaultRole = "Customer";
+        // Role provided by static class from helper in DAL:
+        public  string AssignedRole { get; set; }
+        public IEnumerable<string> AvailableRoles { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
@@ -79,6 +84,11 @@ namespace ComputerRepairShop.Web.ViewModels
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Year of birth")]
+        public DateTime YearOfbirth { get; set; }
+        
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
@@ -89,6 +99,8 @@ namespace ComputerRepairShop.Web.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel

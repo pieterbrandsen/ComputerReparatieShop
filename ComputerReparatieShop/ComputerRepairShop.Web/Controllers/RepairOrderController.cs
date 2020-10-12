@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using System.ComponentModel;
 using System.Data.Entity.Core.Metadata.Edm;
 using Microsoft.Ajax.Utilities;
+using System.Web.Security;
 
 namespace ComputerRepairShop.Web.Controllers
 {
@@ -28,8 +29,18 @@ namespace ComputerRepairShop.Web.Controllers
         [Authorize]
         public ActionResult Index(string id)
         {
-            var model = new RepairOrderViewModel(db.GetByCustomerId(User.Identity.GetUserId()));
+            IEnumerable<RepairOrder> selectedOrders;
+            if (User.IsInRole("Technician"))
+                selectedOrders = db.GetAll();
+         /*   if (User.IsInRole("Technician"))*/
+         /*       selectedOrders = db.GetAll();*/
+            else
+                selectedOrders = db.GetByCustomerId(User.Identity.GetUserId());
+/*            selectedOrders = User.IsInRole("Admin") || User.IsInRole("Technician") ? 
+                             db.GetAll() : 
+                             db.GetByCustomerId(User.Identity.GetUserId());*/
 
+            var model = new RepairOrderViewModel(selectedOrders);
           /*          
            *Refactored and moved to view model:
            *
@@ -71,7 +82,7 @@ namespace ComputerRepairShop.Web.Controllers
         [Authorize]
         public ActionResult Details(int id)
         {
-            var model = db.Get(id);
+            var model = db.GetByOrderId(id);
             if (model == null)
             {
                 return HttpNotFound();
@@ -102,7 +113,7 @@ namespace ComputerRepairShop.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var model = db.Get(id);
+            var model = db.GetByOrderId(id);
             if (model == null)
             {
                 return HttpNotFound();
@@ -135,7 +146,7 @@ namespace ComputerRepairShop.Web.Controllers
         // GET: RepairOrder/Delete/5
         public ActionResult Delete(int id)
         {
-            var model = db.Get(id);
+            var model = db.GetByOrderId(id);
             if (model == null)
             {
                 return View("NotFound");

@@ -13,7 +13,7 @@ namespace ComputerRepairShop.Data.Models
         public string FullName { get; set; }
         public string HomeTown { get; set; }
         public int Age { get; set; }
-        public DateTime YearOfbirth { get; set; }
+        public int YearOfbirth { get; set; }
         public DateTime RegisterDate { get; set; }
 
         public class UserDbContext : IdentityDbContext<ApplicationUser>

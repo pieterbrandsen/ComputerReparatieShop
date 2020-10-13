@@ -2,9 +2,6 @@ namespace ComputerRepairShop.Data.Migrations
 {
     using ComputerRepairShop.ClassLibrary.Helpers;
     using ComputerRepairShop.Data.Models;
-    using ComputerRepairShop.Data.Services;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Graph;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -16,11 +13,15 @@ namespace ComputerRepairShop.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "ComputerRepairShop.Data.Services.ApplicationDbContext";
         }
 
-        protected override void Seed(ApplicationDbContext context)
+        protected override void Seed(ComputerRepairShop.Data.Services.ApplicationDbContext context)
         {
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data.
+
             if (context.Parts.Count() < 1)
             {
                 IList<Part> parts = new List<Part>();
@@ -84,7 +85,7 @@ namespace ComputerRepairShop.Data.Migrations
                 context.SaveChanges();
 
             }
-                base.Seed(context);
+            base.Seed(context);
         }
     }
 }

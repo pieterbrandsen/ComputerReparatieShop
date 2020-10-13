@@ -7,13 +7,13 @@ namespace ComputerRepairShop.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class updateddescriptionsfromtechnicanandcustomerforrepairOrder : IMigrationMetadata
+    public sealed partial class userUpdate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updateddescriptionsfromtechnicanandcustomerforrepairOrder));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(userUpdate));
         
         string IMigrationMetadata.Id
         {
-            get { return "202010120853245_updated-descriptions-from-technican-and-customer-for-repairOrder"; }
+            get { return "202010131311249_userUpdate"; }
         }
         
         string IMigrationMetadata.Source

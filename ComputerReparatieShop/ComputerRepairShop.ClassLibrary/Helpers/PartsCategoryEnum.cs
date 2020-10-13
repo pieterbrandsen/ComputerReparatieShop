@@ -1,6 +1,6 @@
 ﻿namespace ComputerRepairShop.ClassLibrary.Helpers
 {
-    public enum PartsCategoryEnum
+    public enum PartsCategory
     {
         Cpu,
         Case,

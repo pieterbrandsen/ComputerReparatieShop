@@ -16,10 +16,6 @@ namespace ComputerRepairShop.Data.Models
         public DateTime YearOfbirth { get; set; }
         public DateTime RegisterDate { get; set; }
 
-        public string OpenOrders { get; set; }
-        public string ClosedOrders { get; set; }
-        public string TotalOrders => $"{OpenOrders} {ClosedOrders}";
-
         public class UserDbContext : IdentityDbContext<ApplicationUser>
         {
             public UserDbContext() : base("DefaultConnection")

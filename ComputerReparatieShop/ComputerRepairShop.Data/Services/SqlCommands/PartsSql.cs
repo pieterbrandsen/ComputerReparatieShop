@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComputerRepairShop.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,15 +33,15 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
                                                                                  .Where(c => c.Category.ToString() == category);
 
             public IEnumerable<Part> GetMultipleById(params int[] id) => db.Parts.Where(p => id
-                                                                                   .Any(n => p.id == n))
+                                                                                   .Any(n => p.Id == n))
                                                                                    .ToList();
 
             public Part GetSingleById(int id) => db.Parts.Select(p => p)
-                                                     .Where(c => c.id == id)
+                                                     .Where(c => c.Id == id)
                                                      .FirstOrDefault();
 
             public IEnumerable<Part> GetByManufacturer(string manufacturer) => db.Parts.Select(p => p)
-                                                                                         .Where(m => m.manufacturer == manufacturer);
+                                                                                         .Where(m => m.Manufacturer == manufacturer);
         }
     }
 }

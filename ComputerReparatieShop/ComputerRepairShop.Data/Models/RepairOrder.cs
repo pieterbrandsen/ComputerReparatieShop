@@ -9,24 +9,27 @@ namespace ComputerRepairShop.Data.Models
 {
     public class Part
     {
-        public int id { get; set; }
-        public decimal price { get; set; }
-        public string manufacturer { get; set; }
-        public PartEnum Category { get; set; }
+        public Part()
+        {
+            this.RepairOrders = new HashSet<RepairOrder>();
+        }
+        public int Id { get; set; }
+        public string ProductName { get; set; }
+        public string Nickname { get; set; }
+        public short AmountAvaiable { get; set; }
+        public decimal Price { get; set; }
+        public string Manufacturer { get; set; }
+        public PartsCategory Category { get; set; }
+        public virtual ICollection<RepairOrder> RepairOrders { get; set; }
     }
 
-    public class Technian : ApplicationUser
-    {
-        public decimal wage { get; set; }
-        public byte  level { get; set; }
-    }
-
-    public class Customer : ApplicationUser
-    {
-    }
 
     public class RepairOrder
     {
+        public RepairOrder()
+        {
+            this.Parts = new HashSet<Part>();
+        }
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -37,6 +40,7 @@ namespace ComputerRepairShop.Data.Models
         public string DescMechanic { get; set; }
         public string CustomerId { get; set; }
         public string TechnicanId { get; set; }
+        public virtual ICollection<Part> Parts { get; set; }
     }
 
     //public class Person

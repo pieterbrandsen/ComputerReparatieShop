@@ -197,6 +197,18 @@
     <Compile Include="Migrations\202010130856462_updat312.Designer.cs">
       <DependentUpon>202010130856462_updat312.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010131130588_test.cs" />
+    <Compile Include="Migrations\202010131130588_test.Designer.cs">
+      <DependentUpon>202010131130588_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010131138018_removed-fields.cs" />
+    <Compile Include="Migrations\202010131138018_removed-fields.Designer.cs">
+      <DependentUpon>202010131138018_removed-fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010131228278_seed.cs" />
+    <Compile Include="Migrations\202010131228278_seed.Designer.cs">
+      <DependentUpon>202010131228278_seed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -259,6 +271,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010130856462_updat312.resx">
       <DependentUpon>202010130856462_updat312.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010131130588_test.resx">
+      <DependentUpon>202010131130588_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010131138018_removed-fields.resx">
+      <DependentUpon>202010131138018_removed-fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010131228278_seed.resx">
+      <DependentUpon>202010131228278_seed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

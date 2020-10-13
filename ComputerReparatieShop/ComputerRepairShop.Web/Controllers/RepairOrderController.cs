@@ -85,7 +85,9 @@ namespace ComputerRepairShop.Web.Controllers
         [Authorize]
         public ActionResult Details(int id)
         {
-            var model = db.GetByOrderId(id);
+            var model = RepairOrderViewModel.RepairOrderVM(db.GetByOrderId(id));
+
+
             if (model == null)
             {
                 return HttpNotFound();
@@ -95,7 +97,7 @@ namespace ComputerRepairShop.Web.Controllers
 
         [Authorize]
         [ActionName("PassDownModel")]
-        public ActionResult Details(int id, RepairOrder model)
+        public ActionResult Details(int id, RepairOrderViewModel model)
         {
             //var model = db.GetByOrderId(id);
             if (model == null)
@@ -115,8 +117,9 @@ namespace ComputerRepairShop.Web.Controllers
         // POST: RepairOrder/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RepairOrder repairOrder, FormCollection collection)
+        public ActionResult Create(RepairOrderViewModel repairOrderViewModel, FormCollection collection)
         {
+            RepairOrder repairOrder = ConvertVMToM(repairOrderViewModel);
             // TODO: Uncomment bottom redirect to go to unimplemented details views.
             repairOrder.CustomerId = User.Identity.GetUserId();
             db.Add(repairOrder);
@@ -161,7 +164,7 @@ namespace ComputerRepairShop.Web.Controllers
         // GET: RepairOrder/Delete/5
         public ActionResult Delete(int id)
         {
-            var model = db.GetByOrderId(id);
+            var model = RepairOrderViewModel.RepairOrderVM(db.GetByOrderId(id));
             return (model is object) ? View(model) : View("Not found");
         
             /*if (db.GetByOrderId(id) is object)

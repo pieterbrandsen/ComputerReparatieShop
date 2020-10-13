@@ -63,9 +63,9 @@ namespace ComputerRepairShop.Web.ViewModels
         [Display(Name = "Beschrijving van reparateur")]
         public string DescTechnican { get; set; }
 
-        public static RepairOrder RepairOrderVM(RepairOrder order)
+        public static RepairOrderViewModel RepairOrderVM(RepairOrder order)
         {
-            RepairOrder repairOrder = new RepairOrder();
+            RepairOrderViewModel repairOrder = new RepairOrderViewModel();
             repairOrder.Id = order.Id;
             repairOrder.Name = order.Name;
             repairOrder.StartDate = order.StartDate;

@@ -7,6 +7,24 @@ using System.Data.Metadata.Edm;
 
 namespace ComputerRepairShop.Data.Models
 {
+    public class Part
+    {
+        public int id { get; set; }
+        public decimal price { get; set; }
+        public string manufacturer { get; set; }
+        public PartEnum Category { get; set; }
+    }
+
+    public class Technian : ApplicationUser
+    {
+        public decimal wage { get; set; }
+        public byte  level { get; set; }
+    }
+
+    public class Customer : ApplicationUser
+    {
+    }
+
     public class RepairOrder
     {
         public int Id { get; set; }

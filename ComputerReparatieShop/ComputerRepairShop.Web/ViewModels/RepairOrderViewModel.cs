@@ -20,7 +20,16 @@ namespace ComputerRepairShop.Web.ViewModels
             {
                     StatusCount.Add(statData.name, statData.count);
             }
-            if (StatusCount.Count() < Enum.GetValues(typeof(RepairOrderStatus)).Length)
+            var globalStatus = Enum.GetValues(typeof(RepairOrderStatus)).Cast<RepairOrderStatus>();
+            if (StatusCount.Count < globalStatus.Count())
+            {
+                foreach (var emptyStatus in globalStatus.Except(StatusCount.Keys))
+                {
+                    StatusCount.Add(emptyStatus, 0);
+                }
+            }
+
+/*            if (StatusCount.Count() < Enum.GetValues(typeof(RepairOrderStatus)).Length)
             {
                 foreach (var status in Enum.GetValues(typeof(RepairOrderStatus)))
                 {
@@ -28,7 +37,7 @@ namespace ComputerRepairShop.Web.ViewModels
                         StatusCount.Add((RepairOrderStatus)status, 0);
 
                 }
-            }    
+            }*/    
         }
     }
 }

@@ -181,13 +181,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202010131259431_init.cs" />
-    <Compile Include="Migrations\202010131259431_init.Designer.cs">
-      <DependentUpon>202010131259431_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010131311249_userUpdate.cs" />
-    <Compile Include="Migrations\202010131311249_userUpdate.Designer.cs">
-      <DependentUpon>202010131311249_userUpdate.cs</DependentUpon>
+    <Compile Include="Migrations\202010131322170_init.cs" />
+    <Compile Include="Migrations\202010131322170_init.Designer.cs">
+      <DependentUpon>202010131322170_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -240,11 +236,8 @@
     <Content Include="Scripts\npm.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202010131259431_init.resx">
-      <DependentUpon>202010131259431_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010131311249_userUpdate.resx">
-      <DependentUpon>202010131311249_userUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010131322170_init.resx">
+      <DependentUpon>202010131322170_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

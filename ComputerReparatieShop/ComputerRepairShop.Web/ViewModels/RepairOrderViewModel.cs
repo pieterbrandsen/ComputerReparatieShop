@@ -73,6 +73,10 @@ namespace ComputerRepairShop.Web.ViewModels
         [Display(Name = "Beschrijving van reparateur")]
         public string DescTechnican { get; set; }
 
+        [Required]
+        [Display(Name = "Alle gebruikte parts")]
+        public ICollection<Part> Parts { get; set; }
+
         public static RepairOrderViewModel RepairOrderVM(RepairOrder order)
         {
             RepairOrderViewModel repairOrder = new RepairOrderViewModel();
@@ -83,6 +87,7 @@ namespace ComputerRepairShop.Web.ViewModels
             repairOrder.Status = order.Status;
             repairOrder.DescCustomer = order.DescCustomer;
             repairOrder.DescTechnican = order.DescTechnican;
+            repairOrder.Parts = order.Parts;
 
             return repairOrder;
         }

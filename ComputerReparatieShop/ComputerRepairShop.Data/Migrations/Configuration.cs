@@ -2,6 +2,7 @@ namespace ComputerRepairShop.Data.Migrations
 {
     using ComputerRepairShop.ClassLibrary.Helpers;
     using ComputerRepairShop.Data.Models;
+    using ComputerRepairShop.Data.Services;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -15,7 +16,7 @@ namespace ComputerRepairShop.Data.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ComputerRepairShop.Data.Services.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -15,7 +15,7 @@ namespace ComputerRepairShop.Data.Migrations
                         FullName = c.String(),
                         HomeTown = c.String(),
                         Age = c.Int(nullable: false),
-                        YearOfbirth = c.DateTime(nullable: false),
+                        YearOfbirth = c.Int(nullable: false),
                         RegisterDate = c.DateTime(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),

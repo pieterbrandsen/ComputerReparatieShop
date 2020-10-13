@@ -51,6 +51,31 @@
         <dd>
             @Html.DisplayFor(model => model.DescTechnican)
         </dd>
+
+        @{
+            if (Model.Parts.Count > 0)
+            {
+
+                foreach (var part in Model.Parts)
+                {
+                    <dt>
+                        @Html.DisplayName(part.ProductName)
+                    </dt>
+                    <dd>
+                        @part.ProductName
+                    </dd>
+                }
+            }
+            else
+            {
+                <dt>
+                    No Parts!
+                </dt>
+                <dd>
+                    No Parts were found.
+                </dd>
+            }
+        }
     </dl>
 </div>
 <p>

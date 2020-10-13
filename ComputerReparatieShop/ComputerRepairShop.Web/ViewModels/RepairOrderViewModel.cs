@@ -21,16 +21,26 @@ namespace ComputerRepairShop.Web.ViewModels
             {
                 StatusCount.Add(statData.name, statData.count);
             }
-            if (StatusCount.Count() < Enum.GetValues(typeof(RepairOrderStatus)).Length)
+            var globalStatus = Enum.GetValues(typeof(RepairOrderStatus)).Cast<RepairOrderStatus>();
+            if (StatusCount.Count < globalStatus.Count())
             {
-                foreach (var status in Enum.GetValues(typeof(RepairOrderStatus)))
+                foreach (var emptyStatus in globalStatus.Except(StatusCount.Keys))
                 {
-                    if (!StatusCount.ContainsKey((RepairOrderStatus)status))
-                        StatusCount.Add((RepairOrderStatus)status, 0);
-
+                    StatusCount.Add(emptyStatus, 0);
                 }
             }
+
+            /*            if (StatusCount.Count() < Enum.GetValues(typeof(RepairOrderStatus)).Length)
+                        {
+                            foreach (var status in Enum.GetValues(typeof(RepairOrderStatus)))
+                            {
+                                if (!StatusCount.ContainsKey((RepairOrderStatus)status))
+                                    StatusCount.Add((RepairOrderStatus)status, 0);
+
+                            }
+                        }*/
         }
+
     }
     public class RepairOrderViewModel
     {

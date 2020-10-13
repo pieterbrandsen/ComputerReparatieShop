@@ -34,7 +34,7 @@ namespace ComputerRepairShop.Web.Controllers
                                  db.GetByCustomerId(User.Identity.GetUserId()) :
                                  db.GetAll();
 
-            var model = new RepairOrderViewModel(selectedOrders);
+            var model = new RepairOrderPostViewModel(selectedOrders);
             /*          
            *Refactored and moved to view model:
 
@@ -45,7 +45,7 @@ namespace ComputerRepairShop.Web.Controllers
                         else
                             selectedOrders = db.GetByCustomerId(User.Identity.GetUserId());
 
-            var model = new RepairOrderViewModel(selectedOrders);
+            var model = new RepairOrderPostViewModel(selectedOrders);
                     
             IEnumerable<RepairOrder> repairOrders = db.GetByRole(User.Identity.GetUserId());
             IDictionary<RepairOrderStatus, int> statusCount = new Dictionary<RepairOrderStatus, int>();
@@ -128,7 +128,7 @@ namespace ComputerRepairShop.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var model = db.GetByOrderId(id);
+            var model = RepairOrderViewModel.RepairOrderVM(db.GetByOrderId(id));
             if (model == null)
             {
                 return HttpNotFound();
@@ -139,8 +139,9 @@ namespace ComputerRepairShop.Web.Controllers
         // POST: RepairOrder/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(RepairOrder repairOrder, FormCollection collection)
+        public ActionResult Edit(RepairOrderViewModel repairOrderViewModel, FormCollection collection)
         {
+            var repairOrder = ConvertVMToM(repairOrderViewModel);
             if (ModelState.IsValid)
             {
                 try
@@ -177,5 +178,30 @@ namespace ComputerRepairShop.Web.Controllers
             db.Delete(id);
             return RedirectToAction("Index");
         }
+
+        #region Helpers
+
+        private static RepairOrder ConvertVMToM(RepairOrderViewModel repairOrderViewModel)
+        {
+            RepairOrder repairOrder = new RepairOrder();
+
+            repairOrder.Id = repairOrderViewModel.Id;
+            repairOrder.Name = repairOrderViewModel.Name;
+            repairOrder.StartDate = repairOrderViewModel.StartDate;
+            repairOrder.EndDate = repairOrderViewModel.EndDate;
+            repairOrder.Status = repairOrderViewModel.Status;
+            repairOrder.DescCustomer = repairOrderViewModel.DescCustomer;
+            repairOrder.DescTechnican = repairOrderViewModel.DescTechnican;
+
+            return repairOrder;
+        }
+
+        //private static RepairOrderViewModel ConvertMToVM(RepairOrder repairOrder)
+        //{
+        //    RepairOrder repairOrder = new RepairOrder();
+
+        //}
+
+        #endregion
     }
 }

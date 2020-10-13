@@ -13,11 +13,7 @@ namespace ComputerRepairShop.Data.Models
         public string FullName { get; set; }
         public string HomeTown { get; set; }
         public int Age { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime YearOfbirth { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime RegisterDate { get; set; }
 
         public string OpenOrders { get; set; }

@@ -121,10 +121,6 @@
     <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
     </Reference>
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
@@ -197,6 +193,10 @@
     <Compile Include="Migrations\202010091257232_addedLinksToUsersInRepairOrder.Designer.cs">
       <DependentUpon>202010091257232_addedLinksToUsersInRepairOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010130856462_updat312.cs" />
+    <Compile Include="Migrations\202010130856462_updat312.Designer.cs">
+      <DependentUpon>202010130856462_updat312.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -255,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010091257232_addedLinksToUsersInRepairOrder.resx">
       <DependentUpon>202010091257232_addedLinksToUsersInRepairOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010130856462_updat312.resx">
+      <DependentUpon>202010130856462_updat312.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

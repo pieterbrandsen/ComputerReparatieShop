@@ -197,6 +197,10 @@
     <Compile Include="Migrations\202010091257232_addedLinksToUsersInRepairOrder.Designer.cs">
       <DependentUpon>202010091257232_addedLinksToUsersInRepairOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010120853245_updated-descriptions-from-technican-and-customer-for-repairOrder.cs" />
+    <Compile Include="Migrations\202010120853245_updated-descriptions-from-technican-and-customer-for-repairOrder.Designer.cs">
+      <DependentUpon>202010120853245_updated-descriptions-from-technican-and-customer-for-repairOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -255,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010091257232_addedLinksToUsersInRepairOrder.resx">
       <DependentUpon>202010091257232_addedLinksToUsersInRepairOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120853245_updated-descriptions-from-technican-and-customer-for-repairOrder.resx">
+      <DependentUpon>202010120853245_updated-descriptions-from-technican-and-customer-for-repairOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

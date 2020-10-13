@@ -22,8 +22,8 @@ namespace ComputerRepairShop.Data.Models
         public DateTime EndDate { get; set; }
         [Required]
         public RepairOrderStatus Status { get; set; }
-        public string DescClient { get; set; }
-        public string DescMechanic { get; set; }
+        public string DescCustomer { get; set; }
+        public string DescTechnican { get; set; }
         public string CustomerId { get; set; }
         public string TechnicanId { get; set; }
             //public Mechanic Assigned { get; set; }

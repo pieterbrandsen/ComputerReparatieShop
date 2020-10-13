@@ -185,6 +185,10 @@
     <Compile Include="Migrations\202010131322170_init.Designer.cs">
       <DependentUpon>202010131322170_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010131347258_hoursSpent.cs" />
+    <Compile Include="Migrations\202010131347258_hoursSpent.Designer.cs">
+      <DependentUpon>202010131347258_hoursSpent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -238,6 +242,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010131322170_init.resx">
       <DependentUpon>202010131322170_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010131347258_hoursSpent.resx">
+      <DependentUpon>202010131347258_hoursSpent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -36,6 +36,7 @@ namespace ComputerRepairShop.Data.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public RepairOrderStatus Status { get; set; }
+        public int HourSpent { get; set; }
         public string DescCustomer { get; set; }
         public string DescTechnican { get; set; }
         public string CustomerId { get; set; }

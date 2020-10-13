@@ -7,26 +7,40 @@ using System.Data.Metadata.Edm;
 
 namespace ComputerRepairShop.Data.Models
 {
+    public class Part
+    {
+        public Part()
+        {
+            this.RepairOrders = new HashSet<RepairOrder>();
+        }
+        public int Id { get; set; }
+        public string ProductName { get; set; }
+        public string Nickname { get; set; }
+        public short AmountAvaiable { get; set; }
+        public decimal Price { get; set; }
+        public string Manufacturer { get; set; }
+        public PartsCategory Category { get; set; }
+        public virtual ICollection<RepairOrder> RepairOrders { get; set; }
+    }
+
+
     public class RepairOrder
     {
+        public RepairOrder()
+        {
+            this.Parts = new HashSet<Part>();
+        }
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        [Required]
         public DateTime StartDate { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime EndDate { get; set; }
-        [Required]
         public RepairOrderStatus Status { get; set; }
         public string DescCustomer { get; set; }
         public string DescTechnican { get; set; }
         public string CustomerId { get; set; }
         public string TechnicanId { get; set; }
-            //public Mechanic Assigned { get; set; }
+        public virtual ICollection<Part> Parts { get; set; }
     }
 
     //public class Person

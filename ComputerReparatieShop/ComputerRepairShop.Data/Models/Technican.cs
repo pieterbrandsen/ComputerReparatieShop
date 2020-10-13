@@ -10,7 +10,7 @@ namespace ComputerRepairShop.Data.Models
 {
     public class Technican : ApplicationUser
     {
-        public int Wage { get; set; }
+        public decimal Wage { get; set; }
         public int Level { get; set; }
     }
 }

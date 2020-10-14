@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @using Microsoft.AspNet.Identity
+    @using ComputerRepairShop.ClassLibrary.Const;
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -21,17 +22,29 @@
                 @Html.ActionLink("PC repair shop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
-                        <li>@Html.ActionLink("Technicians", "Index", "Technican")</li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                    <ul class="nav navbar-nav">
+
+                        {
                         <li>@Html.ActionLink("RepairOrders", "Index", "RepairOrder")</li>
+                        @if (!User.IsInRole(RoleNames.Customer))
+                        {
+                            <li>@Html.ActionLink("Dashboard", "Dashboard", "Home")</li>
+                            <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
+                            // TODO: Add total overview for mechanics etc.
+                            @*<li>@Html.ActionLink("Employees", "Index", "Home")</li>*@
+                        }
+                        @if (User.IsInRole(RoleNames.Admin))
+                        {
+                            //TODO: Add special role management menu.
+                        }
+                    </ul>
                     }
-                </ul>
-                @Html.Partial("_LoginPartial")
+                    @Html.Partial("_LoginPartial")
+                </div>
+            
             </div>
-        </div>
     </div>
     <div class="container body-content">
         @RenderBody()

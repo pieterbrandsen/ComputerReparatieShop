@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ComputerRepairShop.Data.Services.SqlCommands;
 using ComputerRepairShop.Data.Services.ISqlCommands;
+using ComputerRepairShop.ClassLibrary.Const;
 using Microsoft.AspNet.Identity;
 using System.ComponentModel;
 using System.Data.Entity.Core.Metadata.Edm;
@@ -29,21 +30,23 @@ namespace ComputerRepairShop.Web.Controllers
         [Authorize]
         public ActionResult Index(string id)
         {
-            IEnumerable<RepairOrder> selectedOrders;
-            if (User.IsInRole("Technician"))
-                selectedOrders = db.GetAll();
-         /*   if (User.IsInRole("Technician"))*/
-         /*       selectedOrders = db.GetAll();*/
-            else
-                selectedOrders = db.GetByCustomerId(User.Identity.GetUserId());
-/*            selectedOrders = User.IsInRole("Admin") || User.IsInRole("Technician") ? 
-                             db.GetAll() : 
-                             db.GetByCustomerId(User.Identity.GetUserId());*/
+            var selectedOrders = User.IsInRole(RoleNames.Customer) ?
+                                 db.GetByCustomerId(User.Identity.GetUserId()) :
+                                 db.GetAll();
 
             var model = new RepairOrderViewModel(selectedOrders);
-          /*          
+            /*          
            *Refactored and moved to view model:
-           *
+
+                        if (User.IsInRole(RoleNames.Technician)) 
+                            selectedOrders = db.GetAll();
+                        else if ( User.IsInRole(RoleNames.Admin))
+                            selectedOrders = db.GetAll();
+                        else
+                            selectedOrders = db.GetByCustomerId(User.Identity.GetUserId());
+
+            var model = new RepairOrderViewModel(selectedOrders);
+                    
             IEnumerable<RepairOrder> repairOrders = db.GetByRole(User.Identity.GetUserId());
             IDictionary<RepairOrderStatus, int> statusCount = new Dictionary<RepairOrderStatus, int>();
 
@@ -83,6 +86,18 @@ namespace ComputerRepairShop.Web.Controllers
         public ActionResult Details(int id)
         {
             var model = db.GetByOrderId(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
+        }
+
+        [Authorize]
+        [ActionName("PassDownModel")]
+        public ActionResult Details(int id, RepairOrder model)
+        {
+            //var model = db.GetByOrderId(id);
             if (model == null)
             {
                 return HttpNotFound();
@@ -131,9 +146,8 @@ namespace ComputerRepairShop.Web.Controllers
                 try
                 {
                     db.Update(repairOrder);
-                    // TODO: Uncomment "Details" redirect when implemented
-                    // return RedirectToAction("Details", new { id = repairOrder.Id });
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", new { id = repairOrder.Id });
+                    //  return RedirectToAction("Index");
                 }
                 catch
                 {
@@ -147,11 +161,12 @@ namespace ComputerRepairShop.Web.Controllers
         public ActionResult Delete(int id)
         {
             var model = db.GetByOrderId(id);
-            if (model == null)
-            {
-                return View("NotFound");
-            }
-            return View(model);
+            return (model is object) ? View(model) : View("Not found");
+        
+            /*if (db.GetByOrderId(id) is object)
+                return View(model);
+            else
+                return View("Not found"); */
         }
 
         // POST: RepairOrder/Delete/5

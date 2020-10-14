@@ -1,17 +1,22 @@
-﻿
+﻿@model ComputerRepairShop.Web.ViewModels.RepairOrderViewModel
+@using ComputerRepairShop.Data.Models
 @{
     Layout = null;
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>View</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+<div>
+@foreach (var statusAmount in Model.StatusCount)
+{
+    <h4 style="display:inline">@statusAmount.Key : @statusAmount.Value, </h4>
+}
+@*TODO: Move progress bar to partial, all not customer*@
+@*@Html.Partial("_ProgressBar")*@
+<div class="progress" style="margin-top:2px;">
+    @foreach (var statusAmount in Model.StatusCount)
+    {
+        if (Model.RepairOrders.Count() > 0)
+        {
+            <div class="progress-bar @statusAmount.Key" role="progressbar" style="width: @((Convert.ToInt32(statusAmount.Value/(Model.RepairOrders.Count()*0.01)))+"%")" aria-valuenow="@statusAmount.Value" aria-valuemin="0" aria-valuemax="@(Model.StatusCount.Count())"></div>
+        }
+    }
+</div>
+</div>

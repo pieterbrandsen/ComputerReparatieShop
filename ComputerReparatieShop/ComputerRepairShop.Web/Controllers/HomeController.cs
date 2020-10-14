@@ -1,10 +1,14 @@
-﻿using ComputerRepairShop.Data.Models;
+﻿using ComputerRepairShop.ClassLibrary.Const;
+using ComputerRepairShop.Data.Models;
 using ComputerRepairShop.Data.Services;
+using ComputerRepairShop.Data.Services.ISqlCommands;
+using ComputerRepairShop.Web.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,24 +16,29 @@ namespace ComputerRepairShop.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private IRepairOrderSql db;
+        
+        public HomeController(IRepairOrderSql db)
+        {
+            this.db = db;
+        }
         public ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
+            {
+                ViewBag.Name = "Not logged in.";
+            }
+            else
             {
                 var user = User.Identity;
                 ViewBag.Name = user.Name;
 
                 ViewBag.displayMenu = "No";
-
-                if (isAdminUser())
+                if (User.IsInRole(RoleNames.Admin))
                 {
                     ViewBag.displayMenu = "Yes";
                 }
                 return View();
-            }
-            else
-            {
-                ViewBag.Name = "Not Logged IN";
             }
             return View();
         }
@@ -50,25 +59,16 @@ namespace ComputerRepairShop.Web.Controllers
         [Authorize]
         public ActionResult DashBoard()
          {
-            var model = User;
-            return View();
+
+            var selectedOrders = User.IsInRole(RoleNames.Customer) ?
+                                 db.GetByCustomerId(User.Identity.GetUserId()) :
+                                 User.IsInRole(RoleNames.Technician) ?
+                                 db.GetByEmployeeId(User.Identity.GetUserId()) :
+                                 db.GetAll();
+
+            var model = new RepairOrderViewModel(selectedOrders);
+
+            return View(model);
         }
-
-        #region Helper methods for Actions:
-
-        public Boolean isAdminUser()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                var user = User.Identity;
-                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                var currUser = UserManager.GetRoles(user.GetUserId());
-                return currUser[0].ToString() == "Admin" ? true : false;
-            }
-            return false;
-        }
-
-        #endregion
-
     }
 }

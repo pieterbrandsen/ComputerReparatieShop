@@ -11,12 +11,13 @@ namespace ComputerRepairShop.Data.Services.ISqlCommands
 {
     public interface IRepairOrderSql
     {
-        IEnumerable<RepairOrder> GetAll();
         void Add(RepairOrder order);
-        RepairOrder GetByOrderId(int Id);
         void Delete(int id);
         void Update(RepairOrder repairOrder);
+        RepairOrder GetByOrderId(int Id);
         IEnumerable<RepairOrder> GetByCustomerId(string id);
+        IEnumerable<RepairOrder> GetByEmployeeId(string id);
+        IEnumerable<RepairOrder> GetAll();
     }
 }
 namespace ComputerRepairShop.Data.Services.SqlCommands
@@ -40,6 +41,11 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
             var repairOrder = db.RepairOrders.Find(id);
             db.RepairOrders.Remove(repairOrder);
             db.SaveChanges();
+        }
+
+        public IEnumerable<RepairOrder> GetByEmployeeId(string id)
+        {
+            return db.RepairOrders.Select(order => order).Where(prop => prop.TechnicanId == id);
         }
 
         public RepairOrder GetByOrderId(int id)

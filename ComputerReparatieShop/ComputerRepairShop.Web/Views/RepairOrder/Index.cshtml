@@ -1,27 +1,31 @@
 ﻿@model ComputerRepairShop.Web.ViewModels.RepairOrderViewModel
 @using ComputerRepairShop.Data.Models
+@using ComputerRepairShop.ClassLibrary.Const;
 @{
     ViewBag.Title = "Repair orders";
 }
 
-<div id="Progress-Orders">
-    @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary Btn-Create" })
-    @foreach (var statusAmount in Model.StatusCount)
+@{ string landingMsg = string.Empty;
+    if (User.IsInRole(RoleNames.Customer))
     {
-        <h4 style="display:inline">@statusAmount.Key : @statusAmount.Value, </h4>
+        landingMsg = "Repairs for" + User.Identity.Name;
     }
-    @*TODO: Move progress bar to partial, all not customer*@
-@*@Html.Partial("_ProgressBar")*@
-    <div class="progress" style="margin-top:2px;">
-        @foreach (var statusAmount in Model.StatusCount)
-        {
-            if (Model.RepairOrders.Count() > 0)
-            {
-                                <div class="progress-bar @statusAmount.Key" role="progressbar" style="width: @((Convert.ToInt32(statusAmount.Value/(Model.RepairOrders.Count()*0.01)))+"%")" aria-valuenow="@statusAmount.Value" aria-valuemin="0" aria-valuemax="@(Model.StatusCount.Count())"></div>
-                        }
-        }
-    </div>
+    else 
+    { 
+        landingMsg = "Repairs for Computer Repair Shop";
+    }
+
+   }
+<div class="jumbotron">
+    <h1></h1>
+    <p class="lead">@landingMsg</p>
+    @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary btn-lg" })
+    <p><a class="btn btn-primary btn-lg">create more &raquo;</a></p>
 </div>
+@if(!User.IsInRole(RoleNames.Customer))
+{
+    @Html.Partial("_ProgressBar", Model);
+}
 
 <table class="table table-hover">
     <thead class="thead-dark">
@@ -43,8 +47,11 @@
                 <td @*class="@rowClass"*@>@repairOrder.EndDate.ToString("dddd, dd MMMM yyyy")</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = repairOrder.Id }, new { @class = "btn btn-outline-secondary" })
-                    @Html.ActionLink("Details", "Details", new { id = repairOrder.Id }, new { @class = "btn btn-outline-secondary" })
-                    @Html.ActionLink("Delete", "Delete", new { id = repairOrder.Id }, new { @class = "btn btn-outline-secondary" })
+                    @Html.ActionLink("Details", "Details", new { id = repairOrder.Id, model = repairOrder }, new { @class = "btn btn-outline-secondary" })
+                    @if (!User.IsInRole(RoleNames.Customer))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = repairOrder.Id }, new { @class = "btn btn-outline-secondary" })
+                    }
                 </td>
             </tr>
         }

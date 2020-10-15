@@ -18,6 +18,8 @@ namespace ComputerRepairShop.Data.Services.ISqlCommands
         IEnumerable<RepairOrder> GetByCustomerId(string id);
         IEnumerable<RepairOrder> GetByEmployeeId(string id);
         IEnumerable<RepairOrder> GetAll();
+        IEnumerable<Part> GetAllParts();
+        Part GetPartById(int id);
     }
 }
 namespace ComputerRepairShop.Data.Services.SqlCommands
@@ -60,13 +62,6 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
             return db.RepairOrders.FirstOrDefault(r => r.Id == id);
         }
 
-        public IEnumerable<RepairOrder> GetAll()
-        {
-            return from r in db.RepairOrders
-                   orderby r.StartDate
-                   select r;
-        }
-
         public void Update(RepairOrder repairOrder)
         {
             /*var r = Get(repairOrder.Id);
@@ -74,6 +69,25 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
             var entry = db.Entry(repairOrder);
             entry.State = EntityState.Modified;
             db.SaveChanges();
+        }
+
+        public IEnumerable<RepairOrder> GetAll()
+        {
+            return from r in db.RepairOrders
+                   orderby r.StartDate
+                   select r;
+        }
+
+        public Part GetPartById(int id)
+        {
+            Part part = db.Parts.FirstOrDefault(r => r.Id == id);
+            return db.Parts.FirstOrDefault(r => r.Id == id);
+        }
+        public IEnumerable<Part> GetAllParts()
+        {
+            return from p in db.Parts
+                   orderby p.ProductName
+                   select p;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace ComputerRepairShop.Web.ViewModels
         public RepairOrderPostViewModel(IEnumerable<RepairOrder> retrievedOrders)
         {
             RepairOrders = retrievedOrders;
+
             StatusCount = new Dictionary<RepairOrderStatus, int>();
             foreach (var statData in RepairOrders.Select(order => order.Status).GroupBy(sType => sType).Select(status => (name: status.Key, count: status.Count())))
             {
@@ -77,17 +78,23 @@ namespace ComputerRepairShop.Web.ViewModels
         [Display(Name = "Alle gebruikte parts")]
         public ICollection<Part> Parts { get; set; }
 
-        public static RepairOrderViewModel RepairOrderVM(RepairOrder order)
+        public virtual IEnumerable<Part> AllParts { get; set; }
+        public int[] SelectedParts { get; set; }
+        public static RepairOrderViewModel RepairOrderVM(RepairOrder order, int[] selectedParts, IEnumerable<Part> allParts)
         {
-            RepairOrderViewModel repairOrder = new RepairOrderViewModel();
-            repairOrder.Id = order.Id;
-            repairOrder.Name = order.Name;
-            repairOrder.StartDate = order.StartDate;
-            repairOrder.EndDate = order.StartDate;
-            repairOrder.Status = order.Status;
-            repairOrder.DescCustomer = order.DescCustomer;
-            repairOrder.DescTechnican = order.DescTechnican;
-            repairOrder.Parts = order.Parts;
+            RepairOrderViewModel repairOrder = new RepairOrderViewModel
+            {
+                Id = order.Id,
+                Name = order.Name,
+                StartDate = order.StartDate,
+                EndDate = order.StartDate,
+                Status = order.Status,
+                DescCustomer = order.DescCustomer,
+                DescTechnican = order.DescTechnican,
+                Parts = order.Parts,
+                SelectedParts = selectedParts,
+                AllParts = allParts
+            };
 
             return repairOrder;
         }

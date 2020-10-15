@@ -8,8 +8,14 @@ using System.Web.UI.WebControls;
 
 namespace ComputerRepairShop.Data.Models
 {
-    public class Technican : ApplicationUser
+    public class Technician : ApplicationUser
     {
+        public Technician()
+        {
+            this.RepairOrders = new HashSet<RepairOrder>();
+        }
+
+        public virtual ICollection<RepairOrder> RepairOrders { get; set; }
         public decimal Wage { get; set; }
         public int Level { get; set; }
     }

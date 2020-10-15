@@ -31,15 +31,6 @@ namespace ComputerRepairShop.Web.ViewModels
                 }
             }
 
-            /*            if (StatusCount.Count() < Enum.GetValues(typeof(RepairOrderStatus)).Length)
-                        {
-                            foreach (var status in Enum.GetValues(typeof(RepairOrderStatus)))
-                            {
-                                if (!StatusCount.ContainsKey((RepairOrderStatus)status))
-                                    StatusCount.Add((RepairOrderStatus)status, 0);
-
-                            }
-                        }*/
         }
 
     }
@@ -80,6 +71,7 @@ namespace ComputerRepairShop.Web.ViewModels
 
         public virtual IEnumerable<Part> AllParts { get; set; }
         public int[] SelectedParts { get; set; }
+
         public static RepairOrderViewModel RepairOrderVM(RepairOrder order, int[] selectedParts, IEnumerable<Part> allParts)
         {
             RepairOrderViewModel repairOrder = new RepairOrderViewModel

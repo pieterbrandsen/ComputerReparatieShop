@@ -22,7 +22,7 @@ namespace ComputerRepairShop.Data.Services
 
         // Users
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Technican> Technicians { get; set; }
+        public DbSet<Technician> Technicians { get; set; }
 
         // Parts
         public DbSet<Part> Parts { get; set; }

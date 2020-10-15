@@ -17,10 +17,13 @@ namespace ComputerRepairShop.Web.Controllers
     public class HomeController : Controller
     {
         private IRepairOrderSql db;
+        private ICustomerSql cDb;
+        private ITechnicanSql tDb;
         
-        public HomeController(IRepairOrderSql db)
+        public HomeController(IRepairOrderSql db, ICustomerSql cDb)
         {
             this.db = db;
+            this.cDb = cDb;
         }
         public ActionResult Index()
         {
@@ -59,14 +62,16 @@ namespace ComputerRepairShop.Web.Controllers
         [Authorize]
         public ActionResult DashBoard()
          {
-
             var selectedOrders = User.IsInRole(RoleNames.Customer) ?
                                  db.GetByCustomerId(User.Identity.GetUserId()) :
                                  User.IsInRole(RoleNames.Technician) ?
                                  db.GetByEmployeeId(User.Identity.GetUserId()) :
                                  db.GetAll();
 
-            var model = new RepairOrderPostViewModel(selectedOrders);
+            var customers = cDb.GetAll();
+            var employees = tDb.GetAll();
+
+            var model = new DashboardPostViewModel(customers, selectedOrders, employees);
 
             return View(model);
         }

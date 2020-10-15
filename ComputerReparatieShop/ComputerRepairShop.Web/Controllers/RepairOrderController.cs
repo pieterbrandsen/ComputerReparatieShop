@@ -33,51 +33,16 @@ namespace ComputerRepairShop.Web.Controllers
             var selectedOrders = User.IsInRole(RoleNames.Customer) ?
                                  db.GetByCustomerId(User.Identity.GetUserId()) :
                                  db.GetAll();
+            /*            IEnumerable<RepairOrder> selectedOrders;
+                                    if (User.IsInRole(RoleNames.Technician)) 
+                                        selectedOrders = db.GetAll();
+                                    else if ( User.IsInRole(RoleNames.Admin))
+                                        selectedOrders = db.GetAll();
+                                    else
+                                        selectedOrders = db.GetByCustomerId(User.Identity.GetUserId());*/
 
             var model = new RepairOrderPostViewModel(selectedOrders);
-            /*          
-           *Refactored and moved to view model:
-
-                        if (User.IsInRole(RoleNames.Technician)) 
-                            selectedOrders = db.GetAll();
-                        else if ( User.IsInRole(RoleNames.Admin))
-                            selectedOrders = db.GetAll();
-                        else
-                            selectedOrders = db.GetByCustomerId(User.Identity.GetUserId());
-
-            var model = new RepairOrderPostViewModel(selectedOrders);
-                    
-            IEnumerable<RepairOrder> repairOrders = db.GetByRole(User.Identity.GetUserId());
-            IDictionary<RepairOrderStatus, int> statusCount = new Dictionary<RepairOrderStatus, int>();
-
-            statusCount.Add(RepairOrderStatus.Done, 0);
-            statusCount.Add(RepairOrderStatus.Pending, 0);
-            statusCount.Add(RepairOrderStatus.Underway, 0);
-            statusCount.Add(RepairOrderStatus.WaitingForParts, 0);
-
-            foreach (var repairOrder in repairOrders)
-            {
-                switch (repairOrder.Status)
-                {
-                    case RepairOrderStatus.Done:
-                        statusCount[RepairOrderStatus.Done]++;
-                        break;
-                    case RepairOrderStatus.Pending:
-                        statusCount[RepairOrderStatus.Pending]++;
-                        break;
-                    case RepairOrderStatus.Underway:
-                        statusCount[RepairOrderStatus.Underway]++;
-                        break;
-                    case RepairOrderStatus.WaitingForParts:
-                        statusCount[RepairOrderStatus.WaitingForParts]++;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            model.RepairOrders = repairOrders;
-            model.StatusCount = statusCount;
-            */
+            
             return View(model);
         }
 

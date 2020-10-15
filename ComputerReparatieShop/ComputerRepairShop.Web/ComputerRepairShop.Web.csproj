@@ -412,6 +412,7 @@
     <Content Include="Views\Technican\Edit.cshtml" />
     <Content Include="Views\Technican\Index.cshtml" />
     <Content Include="Views\Shared\_ProgressBar.cshtml" />
+    <Content Include="Views\Shared\_PartsEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,6 +16,7 @@ namespace ComputerRepairShop.Web.ViewModels
         public RepairOrderPostViewModel(IEnumerable<RepairOrder> retrievedOrders)
         {
             RepairOrders = retrievedOrders;
+
             StatusCount = new Dictionary<RepairOrderStatus, int>();
             foreach (var statData in RepairOrders.Select(order => order.Status).GroupBy(sType => sType).Select(status => (name: status.Key, count: status.Count())))
             {
@@ -30,15 +31,6 @@ namespace ComputerRepairShop.Web.ViewModels
                 }
             }
 
-            /*            if (StatusCount.Count() < Enum.GetValues(typeof(RepairOrderStatus)).Length)
-                        {
-                            foreach (var status in Enum.GetValues(typeof(RepairOrderStatus)))
-                            {
-                                if (!StatusCount.ContainsKey((RepairOrderStatus)status))
-                                    StatusCount.Add((RepairOrderStatus)status, 0);
-
-                            }
-                        }*/
         }
 
     }
@@ -73,49 +65,30 @@ namespace ComputerRepairShop.Web.ViewModels
         [Display(Name = "Beschrijving van reparateur")]
         public string DescTechnican { get; set; }
 
-        public static RepairOrderViewModel RepairOrderVM(RepairOrder order)
+        [Required]
+        [Display(Name = "Alle gebruikte parts")]
+        public ICollection<PartModel> Parts { get; set; }
+
+        public virtual IEnumerable<PartModel> AllParts { get; set; }
+        public int[] SelectedParts { get; set; }
+
+        public static RepairOrderViewModel RepairOrderVM(RepairOrder order, int[] selectedParts, IEnumerable<PartModel> allParts)
         {
-            RepairOrderViewModel repairOrder = new RepairOrderViewModel();
-            repairOrder.Id = order.Id;
-            repairOrder.Name = order.Name;
-            repairOrder.StartDate = order.StartDate;
-            repairOrder.EndDate = order.StartDate;
-            repairOrder.Status = order.Status;
-            repairOrder.DescCustomer = order.DescCustomer;
-            repairOrder.DescTechnican = order.DescTechnican;
+            RepairOrderViewModel repairOrderViewModel = new RepairOrderViewModel
+            {
+                Id = order.Id,
+                Name = order.Name,
+                StartDate = order.StartDate,
+                EndDate = order.StartDate,
+                Status = order.Status,
+                DescCustomer = order.DescCustomer,
+                DescTechnican = order.DescTechnican,
+                Parts = order.Parts,
+                SelectedParts = selectedParts,
+                AllParts = allParts
+            };
 
-            return repairOrder;
+            return repairOrderViewModel;
         }
-
-        //private RepairOrder repairOrder = new RepairOrder;
-
-        //public int Id => repairOrder.Id;
-        //[Required]
-        //[Display(Name = "Opdracht naam")]
-        //public string Name => repairOrder.Name;
-
-        //[Required]
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        //[Display(Name = "Start datum")]
-        //public DateTime StartDate => repairOrder.StartDate;
-
-        //[Required]
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        //[Display(Name = "Eind datum")]
-        //public DateTime EndDate => repairOrder.EndDate;
-
-        //[Required]
-        //[Display(Name = "Huidige status")]
-        //public RepairOrderStatus Status => repairOrder.Status;
-
-        //[Required]
-        //[Display(Name = "Beschrijving van klant")]
-        //public string DescCustomer => repairOrder.DescCustomer;
-
-        //[Required]
-        //[Display(Name = "Beschrijving van reparateur")]
-        //public string DescTechnican => repairOrder.DescTechnican;
     }
 }

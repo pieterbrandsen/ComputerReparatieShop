@@ -51,7 +51,8 @@ namespace ComputerRepairShop.Web
             {
                 // Create first Admin role as default user.
                 ApplicationUser admin = CreateAdminUser(roleManager);
-                admin.YearOfbirth = DateTime.Now;
+                admin.YearOfbirth = DateTime.Now.Year;
+                admin.RegisterDate = DateTime.Now;
 
                 // IdentityResult ValidateUser = UserManager.Create(admin, userPWD);
                 if (await userManager.CreateAsync(admin) == IdentityResult.Success)

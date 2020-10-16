@@ -1,26 +1,11 @@
-﻿@*@model ComputerRepairShop.Data.Models.Customer*@
-
-
-@{
-    Layout = null;
-}
-
-
-<!DOCTYPE html>
-
-
-@model ComputerRepairShop.Web.ViewModels.DashboardPostViewModel
+﻿@model ComputerRepairShop.Web.ViewModels.DashboardPostViewModel
 @using ComputerRepairShop.ClassLibrary.Helpers
 
 <div class="jumbotron">
     <h1></h1>
     <p class="lead">Dashboard</p>
 </div>
-// TODO Add more stats.
-        @{ var totalHours = Model.RepairOrders.Where(v => v.Status != RepairOrderStatus.Done)
-                                               .Select(x => x.HourSpent)
-                                               .Sum();
-        }
+
 
 <table class="table">
     <thead class="thead-dark">
@@ -30,6 +15,10 @@
         </tr>
     </thead>
     <tbody>
+        @{ var totalHours = Model.RepairOrders.Where(v => v.Status != RepairOrderStatus.Done)
+                                              .Select(x => x.HourSpent)
+                                              .Sum();
+        }
 
         <tr>
             <td>Total hours active orders</td>
@@ -45,5 +34,8 @@
     </tbody>
 </table>
 
-
-
+<table class="table">
+    <tbody>
+     
+    </tbody>
+</table>

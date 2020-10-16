@@ -11,11 +11,11 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
     {
         public interface IPartsSql
         {
-            IEnumerable<Part> GetMultipleById(params int[] id);
-            IEnumerable<Part> GetAllParts();
-            IEnumerable<Part> GetByCategory(string category);
-            IEnumerable<Part> GetByManufacturer(string manufacturer);
-            Part GetSingleById(int id);
+            IEnumerable<PartModel> GetMultipleById(params int[] id);
+            IEnumerable<PartModel> GetAllParts();
+            IEnumerable<PartModel> GetByCategory(string category);
+            IEnumerable<PartModel> GetByManufacturer(string manufacturer);
+            PartModel GetSingleById(int id);
         }
 
         public class PartsDataService : IPartsSql
@@ -27,20 +27,20 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
                 this.db = db;
             }
 
-            public IEnumerable<Part> GetAllParts() => db.Parts.Select(p => p);
+            public IEnumerable<PartModel> GetAllParts() => db.Parts.Select(p => p);
 
-            public IEnumerable<Part> GetByCategory(string category) => db.Parts.Select(p => p)
+            public IEnumerable<PartModel> GetByCategory(string category) => db.Parts.Select(p => p)
                                                                                  .Where(c => c.Category.ToString() == category);
 
-            public IEnumerable<Part> GetMultipleById(params int[] id) => db.Parts.Where(p => id
+            public IEnumerable<PartModel> GetMultipleById(params int[] id) => db.Parts.Where(p => id
                                                                                    .Any(n => p.Id == n))
                                                                                    .ToList();
 
-            public Part GetSingleById(int id) => db.Parts.Select(p => p)
+            public PartModel GetSingleById(int id) => db.Parts.Select(p => p)
                                                      .Where(c => c.Id == id)
                                                      .FirstOrDefault();
 
-            public IEnumerable<Part> GetByManufacturer(string manufacturer) => db.Parts.Select(p => p)
+            public IEnumerable<PartModel> GetByManufacturer(string manufacturer) => db.Parts.Select(p => p)
                                                                                          .Where(m => m.Manufacturer == manufacturer);
         }
     }

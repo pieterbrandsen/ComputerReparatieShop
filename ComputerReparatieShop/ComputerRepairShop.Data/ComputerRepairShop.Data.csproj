@@ -181,13 +181,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202010090921062_InitialCreate.cs" />
-    <Compile Include="Migrations\202010090921062_InitialCreate.Designer.cs">
-      <DependentUpon>202010090921062_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202010160449455_tst.cs" />
+    <Compile Include="Migrations\202010160449455_tst.Designer.cs">
+      <DependentUpon>202010160449455_tst.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010091005105_newModels.cs" />
-    <Compile Include="Migrations\202010091005105_newModels.Designer.cs">
-      <DependentUpon>202010091005105_newModels.cs</DependentUpon>
+    <Compile Include="Migrations\202010161139171_tableNameUpdate.cs" />
+    <Compile Include="Migrations\202010161139171_tableNameUpdate.Designer.cs">
+      <DependentUpon>202010161139171_tableNameUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202010091257232_addedLinksToUsersInRepairOrder.cs" />
     <Compile Include="Migrations\202010091257232_addedLinksToUsersInRepairOrder.Designer.cs">
@@ -212,8 +212,9 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\PartModel.cs" />
     <Compile Include="Models\RepairOrder.cs" />
-    <Compile Include="Models\Technican.cs" />
+    <Compile Include="Models\Technician.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationDbContext.cs" />
     <Compile Include="Services\IComputerRepairShopData.cs" />
@@ -225,17 +226,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Content\bootstrap-theme.css.map" />
-    <None Include="Content\bootstrap-theme.min.css.map" />
-    <None Include="Content\bootstrap.css.map" />
-    <None Include="Content\bootstrap.min.css.map" />
-    <None Include="fonts\glyphicons-halflings-regular.eot" />
-    <None Include="fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="fonts\glyphicons-halflings-regular.woff" />
-    <None Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
-    <None Include="Scripts\jquery-1.9.0.min.map" />
-    <None Include="Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ComputerRepairShop.ClassLibrary\ComputerRepairShop.ClassLibrary.csproj">
@@ -278,6 +269,8 @@
     <EmbeddedResource Include="Migrations\202010131138018_removed-fields.resx">
       <DependentUpon>202010131138018_removed-fields.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010161139171_tableNameUpdate.resx">
+      <DependentUpon>202010161139171_tableNameUpdate.cs</DependentUpon>
     <EmbeddedResource Include="Migrations\202010131228278_seed.resx">
       <DependentUpon>202010131228278_seed.cs</DependentUpon>
     </EmbeddedResource>

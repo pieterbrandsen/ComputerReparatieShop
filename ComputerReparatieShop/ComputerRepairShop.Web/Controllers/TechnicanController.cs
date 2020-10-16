@@ -51,7 +51,7 @@ namespace ComputerRepairShop.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Technican technican, FormCollection collection)
+        public ActionResult Create(Technician technican, FormCollection collection)
         {
             db.Add(technican);
             return RedirectToAction("Index");
@@ -73,7 +73,7 @@ namespace ComputerRepairShop.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,HomeTown,Age,YearOfbirth,RegisterDate,OpenOrders,ClosedOrders,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Wage,Level")] Technican technican)
+        public ActionResult Edit([Bind(Include = "Id,FullName,HomeTown,Age,YearOfbirth,RegisterDate,OpenOrders,ClosedOrders,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Wage,Level")] Technician technican)
         {
             if (ModelState.IsValid)
             {

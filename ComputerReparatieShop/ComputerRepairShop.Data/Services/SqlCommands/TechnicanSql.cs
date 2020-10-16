@@ -13,11 +13,11 @@ namespace ComputerRepairShop.Data.Services.ISqlCommands
 {
     public interface ITechnicanSql
     {
-        IEnumerable<Technican> GetAll();
-        void Add(Technican order);
-        Technican Get(string Id);
+        IEnumerable<Technician> GetAll();
+        void Add(Technician order);
+        Technician Get(string Id);
         void Delete(string id);
-        void Update(Technican Technican);
+        void Update(Technician Technican);
     }
 }
 namespace ComputerRepairShop.Data.Services.SqlCommands
@@ -30,7 +30,7 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
             this.db = db;
         }
 
-        public void Add(Technican technican)
+        public void Add(Technician technican)
         {
             throw new NotImplementedException();
         }
@@ -42,19 +42,19 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
             db.SaveChanges();
         }
 
-        public Technican Get(string id)
+        public Technician Get(string id)
         {
             return db.Technicians.FirstOrDefault(r => r.Id == id);
         }
 
-        public IEnumerable<Technican> GetAll()
+        public IEnumerable<Technician> GetAll()
         {
             return from r in db.Technicians
                    orderby r.RegisterDate
                    select r;
         }
 
-        public void Update(Technican Technican)
+        public void Update(Technician Technican)
         {
             /*var r = Get(Technican.Id);
             db.SaveChanges();*/

@@ -54,7 +54,7 @@ namespace ComputerRepairShop.Web.ViewModels
 
     public class LoginViewModel
     {
-
+        [Required]
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }

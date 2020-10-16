@@ -13,20 +13,4 @@ namespace ComputerRepairShop.ClassLibrary.Const
         public const string Customer = "Customer";
         public const string Technician = "Technician";
     }
-
-    public class RoleRepo
-    {
-    }
-    /*    public enum RoleNames
-        {
-            Admin,
-            Customer,
-            Technician
-
-        }*/
-
-    /*    public static class RoleNames
-        {
-            static string[] DefinedRoles = new string[] { "Admin", "Customer", "Technician" };
-        }*/
 }

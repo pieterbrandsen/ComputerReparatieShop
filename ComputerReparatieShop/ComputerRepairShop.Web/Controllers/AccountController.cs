@@ -98,7 +98,7 @@ namespace ComputerRepairShop.Web.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    return View();
             }
         }
 
@@ -168,7 +168,7 @@ namespace ComputerRepairShop.Web.Controllers
                 {
                     UserName = model.Name,
                     Email = model.Email,
-                    YearOfbirth = model.YearOfbirth,
+                    YearOfbirth = model.YearOfbirth.Year,
                     Age = DateTime.Now.Year - model.YearOfbirth.Year,
                     RegisterDate = DateTime.Now
                 };

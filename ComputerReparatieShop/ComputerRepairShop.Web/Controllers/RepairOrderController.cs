@@ -26,6 +26,7 @@ namespace ComputerRepairShop.Web.Controllers
             this.db = db;
         }
 
+
         // GET: RepairOrder
         [Authorize]
         public ActionResult Index(string id)
@@ -35,49 +36,7 @@ namespace ComputerRepairShop.Web.Controllers
                                  db.GetAll();
 
             var model = new RepairOrderPostViewModel(selectedOrders);
-            /*          
-           *Refactored and moved to view model:
 
-                        if (User.IsInRole(RoleNames.Technician)) 
-                            selectedOrders = db.GetAll();
-                        else if ( User.IsInRole(RoleNames.Admin))
-                            selectedOrders = db.GetAll();
-                        else
-                            selectedOrders = db.GetByCustomerId(User.Identity.GetUserId());
-
-            var model = new RepairOrderPostViewModel(selectedOrders);
-                    
-            IEnumerable<RepairOrder> repairOrders = db.GetByRole(User.Identity.GetUserId());
-            IDictionary<RepairOrderStatus, int> statusCount = new Dictionary<RepairOrderStatus, int>();
-
-            statusCount.Add(RepairOrderStatus.Done, 0);
-            statusCount.Add(RepairOrderStatus.Pending, 0);
-            statusCount.Add(RepairOrderStatus.Underway, 0);
-            statusCount.Add(RepairOrderStatus.WaitingForParts, 0);
-
-            foreach (var repairOrder in repairOrders)
-            {
-                switch (repairOrder.Status)
-                {
-                    case RepairOrderStatus.Done:
-                        statusCount[RepairOrderStatus.Done]++;
-                        break;
-                    case RepairOrderStatus.Pending:
-                        statusCount[RepairOrderStatus.Pending]++;
-                        break;
-                    case RepairOrderStatus.Underway:
-                        statusCount[RepairOrderStatus.Underway]++;
-                        break;
-                    case RepairOrderStatus.WaitingForParts:
-                        statusCount[RepairOrderStatus.WaitingForParts]++;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            model.RepairOrders = repairOrders;
-            model.StatusCount = statusCount;
-            */
             return View(model);
         }
 
@@ -85,7 +44,8 @@ namespace ComputerRepairShop.Web.Controllers
         [Authorize]
         public ActionResult Details(int id)
         {
-            var model = RepairOrderViewModel.RepairOrderVM(db.GetByOrderId(id));
+            var allParts = db.GetAllParts();
+            var model = RepairOrderViewModel.RepairOrderVM(db.GetByOrderId(id), new int[0], allParts);
 
 
             if (model == null)
@@ -111,7 +71,13 @@ namespace ComputerRepairShop.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var allParts = db.GetAllParts();
+            var model = RepairOrderViewModel.RepairOrderVM(new RepairOrder(), new int[0], allParts);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
         }
 
         // POST: RepairOrder/Create
@@ -121,7 +87,7 @@ namespace ComputerRepairShop.Web.Controllers
         {
             RepairOrder repairOrder = ConvertVMToM(repairOrderViewModel);
             // TODO: Uncomment bottom redirect to go to unimplemented details views.
-            repairOrder.CustomerId = User.Identity.GetUserId();
+            repairOrder.TechnicanId = User.Identity.GetUserId();
             db.Add(repairOrder);
             //return RedirectToAction("Index");
             return RedirectToAction("Details", new { id = repairOrder.Id });
@@ -131,7 +97,8 @@ namespace ComputerRepairShop.Web.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var model = RepairOrderViewModel.RepairOrderVM(db.GetByOrderId(id));
+            var allParts = db.GetAllParts();
+            var model = RepairOrderViewModel.RepairOrderVM(db.GetByOrderId(id), new int[0], allParts);
             if (model == null)
             {
                 return HttpNotFound();
@@ -145,28 +112,36 @@ namespace ComputerRepairShop.Web.Controllers
         public ActionResult Edit(RepairOrderViewModel repairOrderViewModel, FormCollection collection)
         {
             var repairOrder = ConvertVMToM(repairOrderViewModel);
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (repairOrderViewModel.SelectedParts != null && repairOrderViewModel.SelectedParts.Length > 0)
                 {
-                    db.Update(repairOrder);
-                    return RedirectToAction("Details", new { id = repairOrder.Id });
-                    //  return RedirectToAction("Index");
+                    foreach (var partId in repairOrderViewModel.SelectedParts)
+                    {
+                        PartModel part = new PartModel();
+                        part = db.GetPartById(partId);
+                        repairOrder.Parts.Add(part);
+                    }
                 }
-                catch
-                {
-                    return View();
-                }
+
+                db.Update(repairOrder);
+
+                repairOrderViewModel.AllParts = db.GetAllParts();
+                return View(repairOrderViewModel);
             }
-            return View(repairOrder);
+            catch
+            {
+                return View(repairOrderViewModel);
+            }
         }
 
         // GET: RepairOrder/Delete/5
         public ActionResult Delete(int id)
         {
-            var model = RepairOrderViewModel.RepairOrderVM(db.GetByOrderId(id));
+            var allParts = db.GetAllParts();
+            var model = RepairOrderViewModel.RepairOrderVM(db.GetByOrderId(id), new int[0], allParts);
             return (model is object) ? View(model) : View("Not found");
-        
+
             /*if (db.GetByOrderId(id) is object)
                 return View(model);
             else
@@ -184,26 +159,40 @@ namespace ComputerRepairShop.Web.Controllers
 
         #region Helpers
 
-        private static RepairOrder ConvertVMToM(RepairOrderViewModel repairOrderViewModel)
+        private RepairOrder ConvertVMToM(RepairOrderViewModel repairOrderViewModel)
         {
-            RepairOrder repairOrder = new RepairOrder();
+            RepairOrder repairOrder = db.GetByOrderId(repairOrderViewModel.Id);
 
-            repairOrder.Id = repairOrderViewModel.Id;
-            repairOrder.Name = repairOrderViewModel.Name;
-            repairOrder.StartDate = repairOrderViewModel.StartDate;
-            repairOrder.EndDate = repairOrderViewModel.EndDate;
-            repairOrder.Status = repairOrderViewModel.Status;
-            repairOrder.DescCustomer = repairOrderViewModel.DescCustomer;
-            repairOrder.DescTechnican = repairOrderViewModel.DescTechnican;
+            if (repairOrder != null)
+            {
+                repairOrder.Id = repairOrderViewModel.Id;
+                repairOrder.Name = repairOrderViewModel.Name;
+                repairOrder.StartDate = repairOrderViewModel.StartDate;
+                repairOrder.EndDate = repairOrderViewModel.StartDate;
+                repairOrder.Status = repairOrderViewModel.Status;
+                repairOrder.DescCustomer = repairOrderViewModel.DescCustomer;
+                repairOrder.DescTechnican = repairOrderViewModel.DescTechnican;
+                repairOrder.Parts = repairOrderViewModel.Parts;
 
-            return repairOrder;
+                return repairOrder;
+            }
+            else
+            {
+                RepairOrder newRepairOrder = new RepairOrder
+                {
+                    Id = repairOrderViewModel.Id,
+                    Name = repairOrderViewModel.Name,
+                    StartDate = repairOrderViewModel.StartDate,
+                    EndDate = repairOrderViewModel.StartDate,
+                    Status = repairOrderViewModel.Status,
+                    DescCustomer = repairOrderViewModel.DescCustomer,
+                    DescTechnican = repairOrderViewModel.DescTechnican,
+                    Parts = repairOrderViewModel.Parts
+                };
+
+                return newRepairOrder;
+            }
         }
-
-        //private static RepairOrderViewModel ConvertMToVM(RepairOrder repairOrder)
-        //{
-        //    RepairOrder repairOrder = new RepairOrder();
-
-        //}
 
         #endregion
     }

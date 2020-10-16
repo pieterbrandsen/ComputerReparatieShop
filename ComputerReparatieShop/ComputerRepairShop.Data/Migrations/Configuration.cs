@@ -3,8 +3,6 @@ namespace ComputerRepairShop.Data.Migrations
     using ComputerRepairShop.ClassLibrary.Helpers;
     using ComputerRepairShop.Data.Models;
     using ComputerRepairShop.Data.Services;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Graph;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -16,16 +14,20 @@ namespace ComputerRepairShop.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "ComputerRepairShop.Data.Services.ApplicationDbContext";
         }
 
         protected override void Seed(ApplicationDbContext context)
         {
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data.
+
             if (context.Parts.Count() < 1)
             {
-                IList<Part> parts = new List<Part>();
+                IList<PartModel> parts = new List<PartModel>();
 
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "Jntel",
                     ProductName = "10900Z",
@@ -34,7 +36,7 @@ namespace ComputerRepairShop.Data.Migrations
                     Price = 199.99M
                 });
 
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "AMC",
                     ProductName = "AMC Rozen 2",
@@ -42,7 +44,7 @@ namespace ComputerRepairShop.Data.Migrations
                     Category = PartsCategory.Gpu,
                     Price = 0M
                 });
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "Nvidio",
                     ProductName = "4080 Ti XL",
@@ -50,7 +52,7 @@ namespace ComputerRepairShop.Data.Migrations
                     Category = PartsCategory.Gpu,
                     Price = 69.69M
                 });
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "Cooler case",
                     ProductName = "Cooler 3000",
@@ -58,7 +60,7 @@ namespace ComputerRepairShop.Data.Migrations
                     Category = PartsCategory.Case,
                     Price = 19.99M
                 });
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "Mobot",
                     ProductName = "Asur mpog 3012",
@@ -66,7 +68,7 @@ namespace ComputerRepairShop.Data.Migrations
                     Category = PartsCategory.Mobo,
                     Price = 1999.99M
                 });
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "Samseng",
                     ProductName = "950 SSO",
@@ -77,14 +79,14 @@ namespace ComputerRepairShop.Data.Migrations
 
 
 
-                foreach (Part part in parts)
+                foreach (PartModel part in parts)
                 {
                     context.Parts.Add(part);
                 }
                 context.SaveChanges();
 
             }
-                base.Seed(context);
+            base.Seed(context);
         }
     }
 }

@@ -435,10 +435,6 @@
       <Project>{B9EAA9EE-C4E1-4832-848A-4A9D78300C16}</Project>
       <Name>ComputerRepairShop.ClassLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ComputerRepairShop.Data\ComputerRepairShop.Data.csproj">
-      <Project>{DE955B40-D14D-4864-8A0F-541769FD196F}</Project>
-      <Name>ComputerRepairShop.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

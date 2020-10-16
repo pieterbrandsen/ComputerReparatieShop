@@ -74,7 +74,7 @@ namespace ComputerRepairShop.Web.ViewModels
 
         public static RepairOrderViewModel RepairOrderVM(RepairOrder order, int[] selectedParts, IEnumerable<Part> allParts)
         {
-            RepairOrderViewModel repairOrder = new RepairOrderViewModel
+            RepairOrderViewModel repairOrderViewModel = new RepairOrderViewModel
             {
                 Id = order.Id,
                 Name = order.Name,
@@ -88,38 +88,7 @@ namespace ComputerRepairShop.Web.ViewModels
                 AllParts = allParts
             };
 
-            return repairOrder;
+            return repairOrderViewModel;
         }
-
-        //private RepairOrder repairOrder = new RepairOrder;
-
-        //public int Id => repairOrder.Id;
-        //[Required]
-        //[Display(Name = "Opdracht naam")]
-        //public string Name => repairOrder.Name;
-
-        //[Required]
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        //[Display(Name = "Start datum")]
-        //public DateTime StartDate => repairOrder.StartDate;
-
-        //[Required]
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        //[Display(Name = "Eind datum")]
-        //public DateTime EndDate => repairOrder.EndDate;
-
-        //[Required]
-        //[Display(Name = "Huidige status")]
-        //public RepairOrderStatus Status => repairOrder.Status;
-
-        //[Required]
-        //[Display(Name = "Beschrijving van klant")]
-        //public string DescCustomer => repairOrder.DescCustomer;
-
-        //[Required]
-        //[Display(Name = "Beschrijving van reparateur")]
-        //public string DescTechnican => repairOrder.DescTechnican;
     }
 }

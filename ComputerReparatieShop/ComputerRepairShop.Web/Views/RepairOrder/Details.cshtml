@@ -1,5 +1,6 @@
 ﻿@model ComputerRepairShop.Web.ViewModels.RepairOrderViewModel
 
+@using ComputerRepairShop.ClassLibrary.Const;
 @{
     ViewBag.Title = "Details";
 }
@@ -9,74 +10,11 @@
 <div>
     <h4>RepairOrder</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DescCustomer)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DescCustomer)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DescTechnican)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DescTechnican)
-        </dd>
-
-        @{
-            if (Model.Parts.Count > 0)
-            {
-
-                foreach (var part in Model.Parts)
-                {
-                    <dt>
-                        @Html.DisplayName(part.ProductName)
-                    </dt>
-                    <dd>
-                        @part.ProductName
-                    </dd>
-                }
-            }
-            else
-            {
-                <dt>
-                    No Parts!
-                </dt>
-                <dd>
-                    No Parts were found.
-                </dd>
-            }
-        }
-    </dl>
+    @if (!User.IsInRole(RoleNames.Customer))
+    {
+        @Html.Partial("_PartsDetail", Model);
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id })

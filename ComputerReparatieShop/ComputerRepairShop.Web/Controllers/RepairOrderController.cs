@@ -71,7 +71,13 @@ namespace ComputerRepairShop.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var allParts = db.GetAllParts();
+            var model = RepairOrderViewModel.RepairOrderVM(new RepairOrder(), new int[0], allParts);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
         }
 
         // POST: RepairOrder/Create
@@ -81,7 +87,7 @@ namespace ComputerRepairShop.Web.Controllers
         {
             RepairOrder repairOrder = ConvertVMToM(repairOrderViewModel);
             // TODO: Uncomment bottom redirect to go to unimplemented details views.
-            repairOrder.CustomerId = User.Identity.GetUserId();
+            repairOrder.TechnicanId = User.Identity.GetUserId();
             db.Add(repairOrder);
             //return RedirectToAction("Index");
             return RedirectToAction("Details", new { id = repairOrder.Id });
@@ -108,7 +114,7 @@ namespace ComputerRepairShop.Web.Controllers
             var repairOrder = ConvertVMToM(repairOrderViewModel);
             try
             {
-                if (repairOrderViewModel.SelectedParts.Length > 0)
+                if (repairOrderViewModel.SelectedParts != null && repairOrderViewModel.SelectedParts.Length > 0)
                 {
                     foreach (var part in repairOrderViewModel.SelectedParts)
                     {

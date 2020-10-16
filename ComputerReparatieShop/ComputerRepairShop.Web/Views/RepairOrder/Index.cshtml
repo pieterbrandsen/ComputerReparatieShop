@@ -40,11 +40,18 @@
     <tbody>
         @foreach (var repairOrder in Model.RepairOrders)
         {
+            string orderToolate = "On time";
+        <script>
+                const orderStatus = @repairOrder.Status;
+                const orderCreatedTimeInTicks = @repairOrder.StartDate.Ticks;
+                const orderDeliverTimeInTicks = @repairOrder.EndDate.Ticks;
+                @orderToolate = checkIfOrderTooLate(orderStatus, orderCreatedTimeInTicks, orderDeliverTimeInTicks)
+        </script>
             <tr>
                 <td>@repairOrder.Name</td>
                 <td style="text-align:center" class="@repairOrder.Status">@repairOrder.Status</td>
-                <td @*class="@rowClass"*@>@repairOrder.StartDate.ToString("dddd, dd MMMM yyyy")</td>
-                <td @*class="@rowClass"*@>@repairOrder.EndDate.ToString("dddd, dd MMMM yyyy")</td>
+                <td class="functio">@repairOrder.StartDate.ToString("dddd, dd MMMM yyyy")</td>
+                <td class="">@repairOrder.EndDate.ToString("dddd, dd MMMM yyyy")</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = repairOrder.Id }, new { @class = "btn btn-outline-secondary" })
                     @Html.ActionLink("Details", "Details", new { id = repairOrder.Id, model = repairOrder }, new { @class = "btn btn-outline-secondary" })
@@ -58,3 +65,14 @@
     </tbody>
 </table>
 
+
+<script>
+    function checkIfOrderTooLate(orderStatus, orderCreatedTimeInTicks, orderDeliverTimeInTicks) {
+        const currentTimeInTicks = @DateTime.Now.Ticks;
+        let returnString = "On time"; 
+        if ((orderStatus == "Pending" && orderCreatedTimeInTicks > currentTimeInTicks) || (orderStatus !== "Done" && orderDeliverTimeInTicks > currentTimeInTicks))
+        returnString = "TooLate";
+
+        return returnString
+    }
+</script>

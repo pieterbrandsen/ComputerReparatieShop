@@ -35,7 +35,7 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
         public void Add(RepairOrder order)
         {
             db.RepairOrders.Add(order);
-            db.SaveChanges();
+                db.SaveChanges();
         }
 
         public void Delete(int id)

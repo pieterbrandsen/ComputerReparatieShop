@@ -18,8 +18,8 @@ namespace ComputerRepairShop.Data.Services.ISqlCommands
         IEnumerable<RepairOrder> GetByCustomerId(string id);
         IEnumerable<RepairOrder> GetByEmployeeId(string id);
         IEnumerable<RepairOrder> GetAll();
-        IEnumerable<Part> GetAllParts();
-        Part GetPartById(int id);
+        IEnumerable<PartModel> GetAllParts();
+        PartModel GetPartById(int id);
     }
 }
 namespace ComputerRepairShop.Data.Services.SqlCommands
@@ -78,12 +78,12 @@ namespace ComputerRepairShop.Data.Services.SqlCommands
                    select r;
         }
 
-        public Part GetPartById(int id)
+        public PartModel GetPartById(int id)
         {
-            Part part = db.Parts.FirstOrDefault(r => r.Id == id);
+            PartModel part = db.Parts.FirstOrDefault(r => r.Id == id);
             return db.Parts.FirstOrDefault(r => r.Id == id);
         }
-        public IEnumerable<Part> GetAllParts()
+        public IEnumerable<PartModel> GetAllParts()
         {
             return from p in db.Parts
                    orderby p.ProductName

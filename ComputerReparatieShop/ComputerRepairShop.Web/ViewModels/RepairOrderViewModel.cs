@@ -67,12 +67,12 @@ namespace ComputerRepairShop.Web.ViewModels
 
         [Required]
         [Display(Name = "Alle gebruikte parts")]
-        public ICollection<Part> Parts { get; set; }
+        public ICollection<PartModel> Parts { get; set; }
 
-        public virtual IEnumerable<Part> AllParts { get; set; }
+        public virtual IEnumerable<PartModel> AllParts { get; set; }
         public int[] SelectedParts { get; set; }
 
-        public static RepairOrderViewModel RepairOrderVM(RepairOrder order, int[] selectedParts, IEnumerable<Part> allParts)
+        public static RepairOrderViewModel RepairOrderVM(RepairOrder order, int[] selectedParts, IEnumerable<PartModel> allParts)
         {
             RepairOrderViewModel repairOrderViewModel = new RepairOrderViewModel
             {

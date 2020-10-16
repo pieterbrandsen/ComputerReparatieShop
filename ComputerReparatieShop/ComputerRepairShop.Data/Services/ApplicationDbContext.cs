@@ -25,7 +25,7 @@ namespace ComputerRepairShop.Data.Services
         public DbSet<Technician> Technicians { get; set; }
 
         // Parts
-        public DbSet<Part> Parts { get; set; }
+        public DbSet<PartModel> Parts { get; set; }
 
 
         public static ApplicationDbContext Create()

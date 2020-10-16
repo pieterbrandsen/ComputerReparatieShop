@@ -185,10 +185,14 @@
     <Compile Include="Migrations\202010160449455_tst.Designer.cs">
       <DependentUpon>202010160449455_tst.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010161139171_tableNameUpdate.cs" />
+    <Compile Include="Migrations\202010161139171_tableNameUpdate.Designer.cs">
+      <DependentUpon>202010161139171_tableNameUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\PartsModel.cs" />
+    <Compile Include="Models\PartModel.cs" />
     <Compile Include="Models\RepairOrder.cs" />
     <Compile Include="Models\Technician.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,6 +217,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010160449455_tst.resx">
       <DependentUpon>202010160449455_tst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010161139171_tableNameUpdate.resx">
+      <DependentUpon>202010161139171_tableNameUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

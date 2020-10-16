@@ -50,7 +50,7 @@ namespace ComputerRepairShop.Web.ViewModels
         public int YearOfbirth { get; set; }
         public DateTime RegisterDate { get; set; }
 
-        public virtual ICollection<Part> Parts { get; set; }
+        public virtual ICollection<PartModel> Parts { get; set; }
     }
 
     public class TechnicianViewModel

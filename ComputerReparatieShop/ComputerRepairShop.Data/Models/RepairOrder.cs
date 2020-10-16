@@ -11,7 +11,7 @@ namespace ComputerRepairShop.Data.Models
     {
         public RepairOrder()
         {
-            this.Parts = new HashSet<Part>();
+            this.Parts = new HashSet<PartModel>();
         }
         public int Id { get; set; }
 
@@ -24,6 +24,6 @@ namespace ComputerRepairShop.Data.Models
         public string DescTechnican { get; set; }
         public string CustomerId { get; set; }
         public string TechnicanId { get; set; }
-        public virtual ICollection<Part> Parts { get; set; }
+        public virtual ICollection<PartModel> Parts { get; set; }
     }
 }

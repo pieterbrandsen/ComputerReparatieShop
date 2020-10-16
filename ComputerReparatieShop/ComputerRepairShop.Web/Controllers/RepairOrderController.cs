@@ -36,7 +36,7 @@ namespace ComputerRepairShop.Web.Controllers
                                  db.GetAll();
 
             var model = new RepairOrderPostViewModel(selectedOrders);
-            
+
             return View(model);
         }
 
@@ -118,20 +118,16 @@ namespace ComputerRepairShop.Web.Controllers
                 {
                     foreach (var partId in repairOrderViewModel.SelectedParts)
                     {
-                        repairOrder.Parts.Add(db.GetPartById(partId));
-                    }
-                }
-                if (repairOrderViewModel.Parts.Count > 0)
-                {
-                    foreach (var partId in repairOrderViewModel.Parts)
-                    {
-                        repairOrder.Parts.Add(partId);
+                        PartModel part = new PartModel();
+                        part = db.GetPartById(partId);
+                        repairOrder.Parts.Add(part);
                     }
                 }
 
                 db.Update(repairOrder);
+
+                repairOrderViewModel.AllParts = db.GetAllParts();
                 return View(repairOrderViewModel);
-                //  return RedirectToAction("Index");
             }
             catch
             {
@@ -145,7 +141,7 @@ namespace ComputerRepairShop.Web.Controllers
             var allParts = db.GetAllParts();
             var model = RepairOrderViewModel.RepairOrderVM(db.GetByOrderId(id), new int[0], allParts);
             return (model is object) ? View(model) : View("Not found");
-        
+
             /*if (db.GetByOrderId(id) is object)
                 return View(model);
             else
@@ -163,35 +159,40 @@ namespace ComputerRepairShop.Web.Controllers
 
         #region Helpers
 
-        private static RepairOrder ConvertVMToM(RepairOrderViewModel repairOrderViewModel)
+        private RepairOrder ConvertVMToM(RepairOrderViewModel repairOrderViewModel)
         {
-            RepairOrder repairOrder = new RepairOrder
+            RepairOrder repairOrder = db.GetByOrderId(repairOrderViewModel.Id);
+
+            if (repairOrder != null)
             {
-                Id = repairOrderViewModel.Id,
-                Name = repairOrderViewModel.Name,
-                StartDate = repairOrderViewModel.StartDate,
-                EndDate = repairOrderViewModel.StartDate,
-                Status = repairOrderViewModel.Status,
-                DescCustomer = repairOrderViewModel.DescCustomer,
-                DescTechnican = repairOrderViewModel.DescTechnican,
-                Parts = repairOrderViewModel.Parts
-            };
-            //repairOrder.Id = repairOrderViewModel.Id;
-            //repairOrder.Name = repairOrderViewModel.Name;
-            //repairOrder.StartDate = repairOrderViewModel.StartDate;
-            //repairOrder.EndDate = repairOrderViewModel.EndDate;
-            //repairOrder.Status = repairOrderViewModel.Status;
-            //repairOrder.DescCustomer = repairOrderViewModel.DescCustomer;
-            //repairOrder.DescTechnican = repairOrderViewModel.DescTechnican;
+                repairOrder.Id = repairOrderViewModel.Id;
+                repairOrder.Name = repairOrderViewModel.Name;
+                repairOrder.StartDate = repairOrderViewModel.StartDate;
+                repairOrder.EndDate = repairOrderViewModel.StartDate;
+                repairOrder.Status = repairOrderViewModel.Status;
+                repairOrder.DescCustomer = repairOrderViewModel.DescCustomer;
+                repairOrder.DescTechnican = repairOrderViewModel.DescTechnican;
+                repairOrder.Parts = repairOrderViewModel.Parts;
 
-             return repairOrder;
+                return repairOrder;
+            }
+            else
+            {
+                RepairOrder newRepairOrder = new RepairOrder
+                {
+                    Id = repairOrderViewModel.Id,
+                    Name = repairOrderViewModel.Name,
+                    StartDate = repairOrderViewModel.StartDate,
+                    EndDate = repairOrderViewModel.StartDate,
+                    Status = repairOrderViewModel.Status,
+                    DescCustomer = repairOrderViewModel.DescCustomer,
+                    DescTechnican = repairOrderViewModel.DescTechnican,
+                    Parts = repairOrderViewModel.Parts
+                };
+
+                return newRepairOrder;
+            }
         }
-
-        //private static RepairOrderViewModel ConvertMToVM(RepairOrder repairOrder)
-        //{
-        //    RepairOrder repairOrder = new RepairOrder();
-
-        //}
 
         #endregion
     }

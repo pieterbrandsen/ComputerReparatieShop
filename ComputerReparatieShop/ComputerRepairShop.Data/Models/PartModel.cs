@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ComputerRepairShop.Data.Models
 {
-    public class Part
+    public class PartModel
     {
-        public Part()
+        public PartModel()
         {
             this.RepairOrders = new HashSet<RepairOrder>();
         }

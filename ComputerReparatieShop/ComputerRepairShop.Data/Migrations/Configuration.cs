@@ -25,9 +25,9 @@ namespace ComputerRepairShop.Data.Migrations
 
             if (context.Parts.Count() < 1)
             {
-                IList<Part> parts = new List<Part>();
+                IList<PartModel> parts = new List<PartModel>();
 
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "Jntel",
                     ProductName = "10900Z",
@@ -36,7 +36,7 @@ namespace ComputerRepairShop.Data.Migrations
                     Price = 199.99M
                 });
 
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "AMC",
                     ProductName = "AMC Rozen 2",
@@ -44,7 +44,7 @@ namespace ComputerRepairShop.Data.Migrations
                     Category = PartsCategory.Gpu,
                     Price = 0M
                 });
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "Nvidio",
                     ProductName = "4080 Ti XL",
@@ -52,7 +52,7 @@ namespace ComputerRepairShop.Data.Migrations
                     Category = PartsCategory.Gpu,
                     Price = 69.69M
                 });
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "Cooler case",
                     ProductName = "Cooler 3000",
@@ -60,7 +60,7 @@ namespace ComputerRepairShop.Data.Migrations
                     Category = PartsCategory.Case,
                     Price = 19.99M
                 });
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "Mobot",
                     ProductName = "Asur mpog 3012",
@@ -68,7 +68,7 @@ namespace ComputerRepairShop.Data.Migrations
                     Category = PartsCategory.Mobo,
                     Price = 1999.99M
                 });
-                parts.Add(new Part()
+                parts.Add(new PartModel()
                 {
                     Manufacturer = "Samseng",
                     ProductName = "950 SSO",
@@ -79,7 +79,7 @@ namespace ComputerRepairShop.Data.Migrations
 
 
 
-                foreach (Part part in parts)
+                foreach (PartModel part in parts)
                 {
                     context.Parts.Add(part);
                 }

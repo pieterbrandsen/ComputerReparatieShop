@@ -116,16 +116,16 @@ namespace ComputerRepairShop.Web.Controllers
             {
                 if (repairOrderViewModel.SelectedParts != null && repairOrderViewModel.SelectedParts.Length > 0)
                 {
-                    foreach (var part in repairOrderViewModel.SelectedParts)
+                    foreach (var partId in repairOrderViewModel.SelectedParts)
                     {
-                        repairOrder.Parts.Add(db.GetPartById(part));
+                        repairOrder.Parts.Add(db.GetPartById(partId));
                     }
                 }
                 if (repairOrderViewModel.Parts.Count > 0)
                 {
-                    foreach (var part in repairOrderViewModel.Parts)
+                    foreach (var partId in repairOrderViewModel.Parts)
                     {
-                        repairOrder.Parts.Add(part);
+                        repairOrder.Parts.Add(partId);
                     }
                 }
 
@@ -135,7 +135,7 @@ namespace ComputerRepairShop.Web.Controllers
             }
             catch
             {
-                return View();
+                return View(repairOrderViewModel);
             }
         }
 

@@ -3,7 +3,7 @@ namespace ComputerRepairShop.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class collections : DbMigration
+    public partial class tst : DbMigration
     {
         public override void Up()
         {

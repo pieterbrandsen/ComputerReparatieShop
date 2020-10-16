@@ -20,10 +20,11 @@ namespace ComputerRepairShop.Web.Controllers
         private ICustomerSql cDb;
         private ITechnicanSql tDb;
         
-        public HomeController(IRepairOrderSql db, ICustomerSql cDb)
+        public HomeController(IRepairOrderSql db, ICustomerSql cDb, ITechnicanSql tDb)
         {
             this.db = db;
             this.cDb = cDb;
+            this.tDb = tDb;
         }
         public ActionResult Index()
         {

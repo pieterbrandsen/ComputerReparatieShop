@@ -7,13 +7,13 @@ namespace ComputerRepairShop.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class hoursSpent : IMigrationMetadata
+    public sealed partial class collcons : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(hoursSpent));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(collcons));
         
         string IMigrationMetadata.Id
         {
-            get { return "202010131347258_hoursSpent"; }
+            get { return "202010151950500_collcons"; }
         }
         
         string IMigrationMetadata.Source

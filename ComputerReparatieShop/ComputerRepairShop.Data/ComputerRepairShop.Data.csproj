@@ -181,17 +181,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202010131322170_init.cs" />
-    <Compile Include="Migrations\202010131322170_init.Designer.cs">
-      <DependentUpon>202010131322170_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010131347258_hoursSpent.cs" />
-    <Compile Include="Migrations\202010131347258_hoursSpent.Designer.cs">
-      <DependentUpon>202010131347258_hoursSpent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202010151926409_collections.cs" />
-    <Compile Include="Migrations\202010151926409_collections.Designer.cs">
-      <DependentUpon>202010151926409_collections.cs</DependentUpon>
+    <Compile Include="Migrations\202010160449455_tst.cs" />
+    <Compile Include="Migrations\202010160449455_tst.Designer.cs">
+      <DependentUpon>202010160449455_tst.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -244,14 +236,8 @@
     <Content Include="Scripts\npm.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202010131322170_init.resx">
-      <DependentUpon>202010131322170_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010131347258_hoursSpent.resx">
-      <DependentUpon>202010131347258_hoursSpent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010151926409_collections.resx">
-      <DependentUpon>202010151926409_collections.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010160449455_tst.resx">
+      <DependentUpon>202010160449455_tst.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,7 +8,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 
@@ -22,6 +21,7 @@ namespace ComputerRepairShop.Web.Controllers
         
         public HomeController(IRepairOrderSql db, ICustomerSql cDb, ITechnicanSql tDb)
         {
+            // TODO: Change to method injection for less calls etc..
             this.db = db;
             this.cDb = cDb;
             this.tDb = tDb;

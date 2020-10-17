@@ -1,0 +1,41 @@
+﻿@model ComputerRepairShop.Web.ViewModels.DashboardPostViewModel
+@using ComputerRepairShop.ClassLibrary.Helpers
+
+<div class="jumbotron">
+    <h1></h1>
+    <p class="lead">Dashboard</p>
+</div>
+
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Status</th>
+            <th>Among</th>
+        </tr>
+    </thead>
+    <tbody>
+       @{ var totalHours = Model.RepairOrders.Where(v => v.Status != RepairOrderStatus.Done)
+                                            .Select(x => x.HourSpent)
+                                            .Sum();
+        }
+
+            <tr>
+                <td>Total hours active orders</td>
+                <td style="text-align:center" class="">@totalHours</td>
+            </tr>
+        
+    </tbody>
+</table>
+
+<table class="table">
+    <tbody>
+        @foreach (var stat in Model.OpenOrders)
+        {
+            <tr>
+                <td>@stat.Key</td>
+                <td style="text-align:center" class="">@stat.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -34,13 +34,6 @@ namespace ComputerRepairShop.Web.Controllers
             var selectedOrders = User.IsInRole(RoleNames.Customer) ?
                                  db.GetByCustomerId(User.Identity.GetUserId()) :
                                  db.GetAll();
-            /*            IEnumerable<RepairOrder> selectedOrders;
-                                    if (User.IsInRole(RoleNames.Technician)) 
-                                        selectedOrders = db.GetAll();
-                                    else if ( User.IsInRole(RoleNames.Admin))
-                                        selectedOrders = db.GetAll();
-                                    else
-                                        selectedOrders = db.GetByCustomerId(User.Identity.GetUserId());*/
 
             var model = new RepairOrderPostViewModel(selectedOrders);
             

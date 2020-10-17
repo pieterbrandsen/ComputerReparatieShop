@@ -20,10 +20,14 @@ namespace ComputerRepairShop.Web.ViewModels
             this.RetrievedOrders = retrievedOrders;*/
 
             OpenOrders = new Dictionary<RepairOrderStatus, int>();
-            foreach (var orderStatus in retrievedCustomers.SelectMany( p => p.RepairOrders.Select(s => s.Status).GroupBy(stat => stat).Select( s => (name: s.Key, count: s.Count()))))
+            var fetchOpenOrders = retrievedOrders.Select(v => v)
+                                                .Where(astat => astat.Status != RepairOrderStatus.Done)
+                                                .GroupBy(order => order.Status)
+                                                .Select(rstat => (name: rstat.Key, count:rstat.Count()));
+            
+            foreach(var stat in fetchOpenOrders)
             {
-                if(orderStatus.name != RepairOrderStatus.Done)
-                    OpenOrders.Add(orderStatus.name, orderStatus.count);
+                OpenOrders.Add(stat.name, stat.count);
             }
 /*            var e = retrievedOrders.Select( o => o.TechnicanId)
             var a = employees.Except()*/
@@ -35,7 +39,7 @@ namespace ComputerRepairShop.Web.ViewModels
     {
         public CustomerViewModel()
         {
-            this.RepairOrders = new HashSet<RepairOrder>();
+            //this.RepairOrders = new HashSet<RepairOrder>();
         }
 
         public int Id { get; set; }
@@ -53,7 +57,7 @@ namespace ComputerRepairShop.Web.ViewModels
     {
         public TechnicianViewModel()
         {
-            this.RepairOrders = new HashSet<RepairOrder>();
+            //this.RepairOrders = new HashSet<RepairOrder>();
         }
 
         public int Id { get; set; }

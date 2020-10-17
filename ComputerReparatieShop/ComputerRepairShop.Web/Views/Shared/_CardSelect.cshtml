@@ -15,21 +15,15 @@
         </tr>
     </thead>
     <tbody>
-       @{ var totalHours = Model.RepairOrders.Where(v => v.Status != RepairOrderStatus.Done)
-                                            .Select(x => x.HourSpent)
-                                            .Sum();
+        @{ var totalHours = Model.RepairOrders.Where(v => v.Status != RepairOrderStatus.Done)
+                                              .Select(x => x.HourSpent)
+                                              .Sum();
         }
 
-            <tr>
-                <td>Total hours active orders</td>
-                <td style="text-align:center" class="">@totalHours</td>
-            </tr>
-        
-    </tbody>
-</table>
-
-<table class="table">
-    <tbody>
+        <tr>
+            <td>Total hours active orders</td>
+            <td style="text-align:center" class="">@totalHours</td>
+        </tr>
         @foreach (var stat in Model.OpenOrders)
         {
             <tr>
@@ -37,5 +31,11 @@
                 <td style="text-align:center" class="">@stat.Value</td>
             </tr>
         }
+    </tbody>
+</table>
+
+<table class="table">
+    <tbody>
+     
     </tbody>
 </table>
